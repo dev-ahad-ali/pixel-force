@@ -1,0 +1,132 @@
+---
+const technologies = [
+    { name: "React", logo: "⚛️" },
+    { name: "Next.js", logo: "▲" },
+    { name: "Node.js", logo: "🟢" },
+    { name: "Tailwind CSS", logo: "🎨" },
+    { name: "WordPress", logo: "📝" },
+    { name: "Shopify", logo: "🛍️" },
+    { name: "Google Ads", logo: "📊" },
+    { name: "Meta Ads", logo: "📱" },
+    { name: "OpenAI", logo: "🤖" },
+    { name: "TypeScript", logo: "📘" },
+    { name: "MongoDB", logo: "🍃" },
+    { name: "Figma", logo: "🎯" },
+];
+---
+
+<section id="technologies" class="py-20 lg:py-32 px-6 bg-base-200/50">
+    <div class="container mx-auto">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16 observe-fade-up">
+            <span
+                class="badge badge-soft badge-primary text-sm font-medium px-4 py-3 rounded-full mb-4"
+            >
+                Tech Stack
+            </span>
+            <h2
+                class="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-6 text-base-content"
+            >
+                Technologies We Use
+            </h2>
+            <p class="text-lg text-base-content/60">
+                Leveraging the latest and most powerful tools to build
+                exceptional solutions
+            </p>
+        </div>
+
+        <!-- Technologies Grid -->
+        <div
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6"
+        >
+            {
+                technologies.map((tech, index) => (
+                    <div
+                        class="observe-scale-up group"
+                        style={`--delay: ${index * 50}ms`}
+                    >
+                        <div
+                            class="tech-card bg-base-100 border border-base-300 rounded-xl p-6 text-center
+                      hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5
+                      transition-all duration-300 cursor-default"
+                        >
+                            <div class="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110 select-none">
+                                {tech.logo}
+                            </div>
+                            <div class="font-medium text-sm text-base-content">
+                                {tech.name}
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+
+        <!-- Footer note -->
+        <div class="mt-16 text-center observe-fade-up" style="--delay: 400ms">
+            <p class="text-base-content/60">
+                And many more tools and frameworks tailored to your project
+                needs
+            </p>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Card lift + scale on hover */
+    .tech-card {
+        transform: translateY(0) scale(1);
+        transition:
+            transform 0.3s ease,
+            border-color 0.3s ease,
+            box-shadow 0.3s ease;
+    }
+    .group:hover .tech-card {
+        transform: translateY(-8px) scale(1.05);
+    }
+
+    /* Scroll-triggered: fade up (header + footer) */
+    .observe-fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+            opacity 0.55s ease calc(var(--delay, 0ms)),
+            transform 0.55s ease calc(var(--delay, 0ms));
+    }
+    .observe-fade-up.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Scroll-triggered: scale pop (cards) */
+    .observe-scale-up {
+        opacity: 0;
+        transform: scale(0.8);
+        transition:
+            opacity 0.5s ease calc(var(--delay, 0ms)),
+            transform 0.5s ease calc(var(--delay, 0ms));
+    }
+    .observe-scale-up.in-view {
+        opacity: 1;
+        transform: scale(1);
+    }
+</style>
+
+<script>
+    const observer = new IntersectionObserver(
+        (entries) =>
+            entries.forEach((e) => {
+                if (e.isIntersecting) {
+                    e.target.classList.add("in-view");
+                    observer.unobserve(e.target);
+                }
+            }),
+        { threshold: 0.1 },
+    );
+
+    document
+        .querySelectorAll(
+            "#technologies .observe-fade-up, #technologies .observe-scale-up",
+        )
+        .forEach((el) => observer.observe(el));
+</script>
