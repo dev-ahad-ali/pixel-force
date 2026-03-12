@@ -49,18 +49,6 @@ const projects: Project[] = [
     description: 'AI-powered financial management platform with intelligent budgeting and automated expense tracking.',
     results: ['50k+ active users', '95% user retention rate', 'Featured in App Store'],
   },
-  {
-    id: 4,
-    title: 'GreenLeaf Brand Identity',
-    category: 'Branding',
-    image: 'https://images.unsplash.com/photo-1764383381195-5daa5902c3f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3Jwb3JhdGUlMjBicmFuZGluZyUyMGRlc2lnbnxlbnwxfHx8fDE3NzMyMDU4Mzd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    client: 'GreenLeaf Organics',
-    industry: 'Organic Products',
-    services: ['Logo & Brand Design', 'Digital Marketing'],
-    technologies: ['Adobe Creative Suite', 'Figma'],
-    description: 'Complete brand redesign including logo, color palette, typography, and brand guidelines for organic food company.',
-    results: ['Brand recognition up 180%', 'Social engagement +250%', 'Premium pricing achieved'],
-  },
 ];
 ---
 
@@ -81,7 +69,7 @@ const projects: Project[] = [
     </div>
 
     <!-- Projects Grid -->
-    <div class="grid md:grid-cols-2 gap-8">
+    <div class="grid md:grid-cols-3 gap-8">
       {projects.map((project, index) => (
         <div
           class="observe-fade-up group cursor-pointer project-card"

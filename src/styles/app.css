@@ -81,27 +81,6 @@
         --base-background: #27272a50;
     }
 
-    @keyframes badge-spin {
-        from {
-            transform: translate(-50%, -50%) rotate(0deg);
-        }
-        to {
-            transform: translate(-50%, -50%) rotate(360deg);
-        }
-    }
-    .badge-spin {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 300%;
-        height: 300%;
-        animation: badge-spin 3s linear infinite;
-        background: conic-gradient(
-            var(--color-primary) 0deg 40deg,
-            transparent 40deg 360deg
-        );
-    }
-
     body {
         font-family:
             "Inter",
