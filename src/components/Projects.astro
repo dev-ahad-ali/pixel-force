@@ -50,6 +50,13 @@ const projects: Project[] = [
     results: ['50k+ active users', '95% user retention rate', 'Featured in App Store'],
   },
 ];
+
+const categories =[
+    'React.Js',
+    'Next.Js',
+    'Wordpress',
+    'Astro',
+]
 ---
 
 <section id="projects" class="py-20 lg:py-32 px-6">
@@ -67,6 +74,12 @@ const projects: Project[] = [
         Explore our portfolio of successful projects that delivered exceptional results
       </p>
     </div>
+
+        <div class="join w-full justify-center mb-12">
+            {categories.map((item, idx) => (
+                <button class={`btn join-item ${idx === 0 ? "btn-primary" : ""}`}>{item}</button>
+            ))}
+        </div>
 
     <!-- Projects Grid -->
     <div class="grid md:grid-cols-3 gap-8">
@@ -113,7 +126,7 @@ const projects: Project[] = [
   </div>
 </section>
 
-<!-- ── Modal (DaisyUI dialog) ──────────────────────────────────── -->
+<!-- ── Modal  ──────────────────────────────────── -->
 <dialog id="project-modal" class="modal modal-bottom sm:modal-middle">
   <div class="modal-box w-full max-w-4xl max-h-[90vh] p-0 overflow-hidden bg-base-100 border border-base-300 rounded-2xl">
 
