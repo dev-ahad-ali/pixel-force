@@ -28,7 +28,12 @@ const testimonials = [
     rating: 5,
   },
 ];
-
+const testimonialsStats = [
+  { avatar: "https://i.pravatar.cc/150?img=1", name: "Client 1" },
+  { avatar: "https://i.pravatar.cc/150?img=2", name: "Client 2" },
+  { avatar: "https://i.pravatar.cc/150?img=3", name: "Client 3" },
+  { avatar: "https://i.pravatar.cc/150?img=4", name: "Client 4" },
+];
 ---
 
 <section id="testimonials" class="py-20 lg:py-32 px-6">
@@ -62,7 +67,7 @@ const testimonials = [
               {Array.from({ length: t.rating }).map(() => (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-5 h-5 fill-primary text-primary"
+                  class="w-5 h-5 fill-amber-300 text-amber-300"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                 >
@@ -97,6 +102,50 @@ const testimonials = [
           </div>
         </div>
       ))}
+    </div>
+
+    <!-- Testimonials Stats -->
+    <div class="mt-16 text-center">
+      <div class="inline-flex flex-col sm:flex-row items-center gap-8 px-8 py-6 rounded-2xl bg-base-200 border border-base-300">
+
+        <!-- Avatars + Client Count -->
+        <div class="flex items-center gap-2">
+          <div class="avatar-group -space-x-4">
+            {testimonialsStats.map((t) => (
+              <div class="avatar">
+                <div class="w-10 rounded-full ring-2 ring-base-100">
+                  <img src={t.avatar} alt={t.name} />
+                </div>
+              </div>
+            ))}
+          </div>
+          <span class="text-sm font-medium text-base-content/60">
+            50+ Happy Clients
+          </span>
+        </div>
+
+        <!-- Divider (visible on sm+) -->
+        <div class="divider divider-horizontal hidden sm:flex"></div>
+
+        <!-- Stars + Rating -->
+        <div class="flex items-center gap-2">
+          <div class="rating rating-sm">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <input
+                type="radio"
+                name="rating-display"
+                class="mask mask-star-2 bg-warning"
+                checked={i === 5}
+                disabled
+              />
+            ))}
+          </div>
+          <span class="text-sm font-medium text-base-content/60">
+            5.0 Average Rating
+          </span>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
