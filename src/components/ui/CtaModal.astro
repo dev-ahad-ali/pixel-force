@@ -1,0 +1,245 @@
+---
+
+---
+
+<dialog id="project_modal" class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box w-full max-w-lg p-0 overflow-hidden rounded-2xl">
+        <!-- Header -->
+        <div class="bg-base-200 px-6 pt-6 pb-4 border-b border-base-300">
+            <div class="flex items-start justify-between">
+                <div>
+                    <h3 class="text-xl font-bold tracking-tight">
+                        Let's work together
+                    </h3>
+                    <p class="text-sm text-base-content/50 mt-0.5">
+                        Tell me about your project
+                    </p>
+                </div>
+                <button
+                    onclick="project_modal.close()"
+                    class="btn btn-sm btn-ghost btn-circle -mt-1 -mr-1 text-base-content/40 hover:text-base-content"
+                    >✕</button
+                >
+            </div>
+        </div>
+
+        <!-- Form Body -->
+        <div class="px-6 py-5 space-y-4">
+            <!-- Name + Email row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <label class="form-control w-full">
+                    <div class="label pb-1">
+                        <span
+                            class="label-text text-xs font-semibold uppercase tracking-widest text-primary"
+                            >Name</span
+                        >
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="Jane Smith"
+                        class="input input-bordered input-sm w-full focus:input-primary"
+                    />
+                </label>
+
+                <label class="form-control w-full">
+                    <div class="label pb-1">
+                        <span
+                            class="label-text text-xs font-semibold uppercase tracking-widest text-primary"
+                            >Email</span
+                        >
+                    </div>
+                    <input
+                        type="email"
+                        placeholder="jane@example.com"
+                        class="input input-bordered input-sm w-full focus:input-primary"
+                    />
+                </label>
+            </div>
+
+            <!-- WhatsApp -->
+            <label class="form-control w-full">
+                <div class="label pb-1">
+                    <span
+                        class="label-text text-xs font-semibold uppercase tracking-widest text-primary"
+                        >WhatsApp Number</span
+                    >
+                </div>
+                <label
+                    class="input input-bordered input-sm flex items-center gap-2 focus-within:outline focus-within:outline-2 focus-within:outline-primary/50"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-4 h-4 text-base-content/30 shrink-0"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                    >
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+                        ></path>
+                        <path
+                            d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.855L.057 23.886a.75.75 0 0 0 .921.921l6.045-1.47A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.695 9.695 0 0 1-4.947-1.354l-.355-.21-3.668.892.908-3.583-.23-.368A9.699 9.699 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"
+                        ></path>
+                    </svg>
+                    <input
+                        type="text"
+                        placeholder="+1 234 567 8900"
+                        class="grow bg-transparent outline-none text-sm"
+                    />
+                </label>
+            </label>
+
+            <!-- Project Overview -->
+            <label class="form-control w-full">
+                <div class="label pb-1 mt-4">
+                    <span
+                        class="label-text text-xs font-semibold uppercase tracking-widest text-primary"
+                        >Project Overview</span
+                    >
+                </div>
+                <textarea
+                    class="textarea textarea-bordered focus:textarea-primary w-full resize-none text-sm"
+                    placeholder="Describe your project goals, timeline, and any important details..."
+                    rows="4"></textarea>
+            </label>
+
+            <!-- Design File / Link (Optional) -->
+            <div class="form-control w-full">
+                <div class="label pb-1 mt-4">
+                    <span
+                        class="label-text text-xs font-semibold uppercase tracking-widest text-primary"
+                    >
+                        Design File / Link
+                        <span
+                            class="normal-case font-normal text-base-content/30 ml-1"
+                            >(Optional)</span
+                        >
+                    </span>
+                </div>
+
+                <!-- Toggle tabs -->
+                <div
+                    class="tabs tabs-boxed bg-base-200 w-fit mb-3 p-0.5 rounded-lg"
+                    id="design-tabs"
+                >
+                    <button
+                        type="button"
+                        onclick="switchTab('file')"
+                        id="tab-file"
+                        class="tab tab-sm rounded-md tab-active text-xs font-medium"
+                        >Upload File</button
+                    >
+                    <button
+                        type="button"
+                        onclick="switchTab('url')"
+                        id="tab-url"
+                        class="tab tab-sm rounded-md text-xs font-medium"
+                        >Paste URL</button
+                    >
+                </div>
+
+                <div id="panel-file">
+                    <div
+                        class="border-2 border-dashed border-base-300 hover:border-primary/50 transition-colors rounded-xl p-5 text-center cursor-pointer group"
+                        onclick="document.getElementById('file-upload').click()"
+                    >
+                        <input
+                            type="file"
+                            id="file-upload"
+                            class="hidden"
+                            accept=".fig,.pdf,.png,.jpg,.zip,.sketch"
+                        />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="w-8 h-8 mx-auto mb-2 text-base-content/20 group-hover:text-primary/50 transition-colors"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                            ></path>
+                        </svg>
+                        <p class="text-xs text-base-content/40">
+                            Drop file here or <span
+                                class="text-primary font-medium">browse</span
+                            >
+                        </p>
+                        <p class="text-xs text-base-content/25 mt-1">
+                            Figma, Sketch, PDF, PNG, ZIP
+                        </p>
+                    </div>
+                </div>
+
+                <div id="panel-url" class="hidden">
+                    <input
+                        type="url"
+                        placeholder="https://figma.com/file/..."
+                        class="input input-bordered input-sm w-full focus:input-primary"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="px-6 pb-6 pt-2 flex items-center justify-between gap-3">
+            <button
+                onclick="project_modal.close()"
+                class="btn btn-ghost btn-sm text-base-content/40"
+            >
+                Cancel
+            </button>
+            <button class="btn btn-primary btn-sm px-6 gap-2">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+                Send Inquiry
+            </button>
+        </div>
+    </div>
+
+    <!-- Backdrop close -->
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
+
+<script>
+    function switchTab(tab: string) {
+        const filePanel = document.getElementById("panel-file");
+        const urlPanel = document.getElementById("panel-url");
+        const tabFile = document.getElementById("tab-file");
+        const tabUrl = document.getElementById("tab-url");
+
+        if (tab === "file") {
+            filePanel?.classList.remove("hidden");
+            urlPanel?.classList.add("hidden");
+            tabFile?.classList.add("tab-active");
+            tabUrl?.classList.remove("tab-active");
+        } else {
+            urlPanel?.classList.remove("hidden");
+            filePanel?.classList.add("hidden");
+            tabUrl?.classList.add("tab-active");
+            tabFile?.classList.remove("tab-active");
+        }
+    }
+
+    document
+        .getElementById("tab-file")
+        ?.addEventListener("click", () => switchTab("file"));
+    document
+        .getElementById("tab-url")
+        ?.addEventListener("click", () => switchTab("url"));
+</script>
