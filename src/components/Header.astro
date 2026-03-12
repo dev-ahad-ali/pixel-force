@@ -1,4 +1,6 @@
 ---
+import { Pilcrow } from "@lucide/astro";
+
 const navLinks = [
     { name: "Home", href: "#home" },
     { name: "Services", href: "#services" },
@@ -13,8 +15,8 @@ const navLinks = [
     id="site-header"
     class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
 >
-    <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center justify-between">
+    <div class="px-6 py-4">
+        <div class="container mx-auto flex items-center justify-between">
             <!-- Logo -->
             <a
                 href="#home"
@@ -24,8 +26,7 @@ const navLinks = [
                 <div
                     class="w-10 h-10 bg-linear-to-br from-primary to-accent rounded-lg flex items-center justify-center shadow-sm"
                 >
-                    <span class="text-primary-content text-xl font-bold">P</span
-                    >
+                    <Pilcrow class="text-xl font-bold" />
                 </div>
                 <span class="text-xl font-semibold text-base-content"
                     >Pixel Force</span
@@ -143,9 +144,7 @@ const navLinks = [
                     <div
                         class="w-8 h-8 bg-linear-to-br from-primary to-accent rounded-lg flex items-center justify-center"
                     >
-                        <span class="text-primary-content text-sm font-bold"
-                            >P</span
-                        >
+                        <Pilcrow class="text-sm font-bold" />
                     </div>
                     <span class="font-semibold text-base-content"
                         >Pixel Force</span
