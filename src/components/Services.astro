@@ -1,34 +1,49 @@
 ---
+import {
+  Megaphone,
+  Code,
+  Palette,
+  Cpu,
+  Search,
+  TrendingUp,
+} from '@lucide/astro';
+
 const services = [
   {
-    emoji: '📣',
+    icon: Megaphone,
     title: 'Digital Marketing',
-    description: 'Drive growth with data-driven marketing strategies across all digital channels.',
+    description:
+      'Drive growth with data-driven marketing strategies across all digital channels.',
   },
   {
-    emoji: '💻',
+    icon: Code,
     title: 'Website Development',
-    description: 'Build fast, responsive, and beautiful websites that convert visitors into customers.',
+    description:
+      'Build fast, responsive, and beautiful websites that convert visitors into customers.',
   },
   {
-    emoji: '🎨',
+    icon: Palette,
     title: 'Logo & Brand Design',
-    description: 'Create memorable brand identities that resonate with your target audience.',
+    description:
+      'Create memorable brand identities that resonate with your target audience.',
   },
   {
-    emoji: '🤖',
+    icon: Cpu,
     title: 'AI Automation',
-    description: 'Streamline operations and boost efficiency with intelligent automation solutions.',
+    description:
+      'Streamline operations and boost efficiency with intelligent automation solutions.',
   },
   {
-    emoji: '🔍',
+    icon: Search,
     title: 'SEO Optimization',
-    description: 'Rank higher on search engines and attract more organic traffic to your site.',
+    description:
+      'Rank higher on search engines and attract more organic traffic to your site.',
   },
   {
-    emoji: '📈',
+    icon: TrendingUp,
     title: 'Conversion Optimization',
-    description: 'Maximize ROI by optimizing every step of your customer journey.',
+    description:
+      'Maximize ROI by optimizing every step of your customer journey.',
   },
 ];
 ---
@@ -51,31 +66,34 @@ const services = [
 
     <!-- Services Grid -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {services.map((service, index) => (
-        <div
-          class="observe-fade-up group"
-          style={`--delay: ${index * 100}ms`}
-        >
-          <div class="service-card h-full bg-base-100 border border-base-300 rounded-2xl p-8 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 cursor-default">
+      {services.map((service, index) => {
+      const Icon = service.icon;
+     return (
+     <div
+       class="observe-fade-up group"
+       style={`--delay: ${index * 100}ms`}
+     >
+       <div class="service-card h-full bg-base-100 border border-base-300 rounded-2xl p-8 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 cursor-default">
 
-            <!-- Icon -->
-            <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 transition-colors duration-300 group-hover:bg-primary/20">
-              <span class="text-2xl" aria-hidden="true">{service.emoji}</span>
-            </div>
+         <!-- Icon -->
+         <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 transition-colors duration-300 group-hover:bg-primary/20">
+             <Icon class="w-7 h-7 text-primary" />
+         </div>
 
-            <!-- Content -->
-            <h3 class="text-xl font-semibold mb-3 text-base-content">{service.title}</h3>
-            <p class="text-base-content/60 leading-relaxed">{service.description}</p>
+         <!-- Content -->
+         <h3 class="text-xl font-semibold mb-3 text-base-content">{service.title}</h3>
+         <p class="text-base-content/60 leading-relaxed">{service.description}</p>
 
-            <!-- Hover arrow -->
-            <div class="mt-6 text-primary font-medium flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              Learn more
-              <span class="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </div>
+         <!-- Hover arrow -->
+         <div class="mt-6 text-primary font-medium flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+           Learn more
+           <span class="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
+         </div>
 
-          </div>
-        </div>
-      ))}
+       </div>
+     </div>
+     )
+      })}
     </div>
 
   </div>
