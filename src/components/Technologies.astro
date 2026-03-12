@@ -1,17 +1,17 @@
 ---
 const technologies = [
-    { name: "React", logo: "⚛️" },
-    { name: "Next.js", logo: "▲" },
-    { name: "Node.js", logo: "🟢" },
-    { name: "Tailwind CSS", logo: "🎨" },
-    { name: "WordPress", logo: "📝" },
-    { name: "Shopify", logo: "🛍️" },
-    { name: "Google Ads", logo: "📊" },
-    { name: "Meta Ads", logo: "📱" },
-    { name: "OpenAI", logo: "🤖" },
-    { name: "TypeScript", logo: "📘" },
-    { name: "MongoDB", logo: "🍃" },
-    { name: "Figma", logo: "🎯" },
+    { name: "React", logo: "/icons/react.svg" },
+    { name: "Next.js", logo: "/icons/next.svg" },
+    { name: "Node.js", logo: "/icons/node.svg" },
+    { name: "Tailwind CSS", logo: "/icons/tailwind.svg" },
+    { name: "WordPress", logo: "/icons/wordpress.svg" },
+    { name: "Shopify", logo: "/icons/shopify.svg" },
+    { name: "Google Ads", logo: "/icons/google-ads.svg" },
+    { name: "Meta Ads", logo: "/icons/meta-ads.svg" },
+    { name: "AI Automation", logo: "/icons/ai.svg" },
+    { name: "TypeScript", logo: "/icons/typescript.svg" },
+    { name: "MongoDB", logo: "/icons/mongodb.svg" },
+    { name: "Figma", logo: "/icons/figma.svg" },
 ];
 ---
 
@@ -50,9 +50,10 @@ const technologies = [
                       hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5
                       transition-all duration-300 cursor-default"
                         >
-                            <div class="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110 select-none">
-                                {tech.logo}
-                            </div>
+                            <img
+                                src={tech.logo}
+                                class="max-w-18 mx-auto mb-4 transition-transform duration-300 group-hover:scale-110 select-none"
+                            />
                             <div class="font-medium text-sm text-base-content">
                                 {tech.name}
                             </div>
