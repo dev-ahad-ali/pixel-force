@@ -1,2 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 @plugin "daisyui";
+
+/* ── Light theme ─────────────────────────────────────────────── */
+@plugin "daisyui/theme" {
+    name: "emerald-light";
+    default: true;
+    color-scheme: light;
+
+    --color-primary: oklch(68.8% 0.163 163.42); /* #10b981 */
+    --color-primary-content: oklch(100% 0 0); /* #ffffff */
+
+    --color-secondary: oklch(93% 0.008 264); /* #e8e8f0 */
+    --color-secondary-content: oklch(5% 0.02 264); /* #030213 */
+
+    --color-accent: oklch(69.6% 0.138 183.6); /* #14b8a6 */
+    --color-accent-content: oklch(100% 0 0); /* #ffffff */
+
+    --color-neutral: oklch(52% 0.01 264); /* #717182 */
+    --color-neutral-content: oklch(100% 0 0);
+
+    --color-base-100: oklch(100% 0 0); /* #ffffff  — background */
+    --color-base-200: oklch(97.5% 0.002 264); /* #f8f9fa  — card       */
+    --color-base-300: oklch(93.5% 0.005 264); /* #ececf0  — muted      */
+    --color-base-content: oklch(14.5% 0 0); /* #0f0f14  — foreground */
+
+    --color-info: oklch(69.6% 0.138 183.6); /* #14b8a6 */
+    --color-info-content: oklch(100% 0 0);
+    --color-success: oklch(68.8% 0.163 163.42); /* #10b981 */
+    --color-success-content: oklch(100% 0 0);
+    --color-warning: oklch(75% 0.183 66); /* #f59e0b */
+    --color-warning-content: oklch(100% 0 0);
+    --color-error: oklch(44% 0.2 15); /* #d4183d */
+    --color-error-content: oklch(100% 0 0);
+
+    --radius-box: 0.625rem;
+    --radius-field: 0.5rem;
+    --radius-selector: 0.375rem;
+}
+
+/* ── Dark theme ──────────────────────────────────────────────── */
+@plugin "daisyui/theme" {
+    name: "emerald-dark";
+    color-scheme: dark;
+
+    --color-primary: oklch(68.8% 0.163 163.42); /* #10b981 */
+    --color-primary-content: oklch(100% 0 0);
+
+    --color-secondary: oklch(27% 0.005 264); /* #3f3f46 */
+    --color-secondary-content: oklch(96% 0 0); /* #f5f5f5 */
+
+    --color-accent: oklch(69.6% 0.138 183.6); /* #14b8a6 */
+    --color-accent-content: oklch(100% 0 0);
+
+    --color-neutral: oklch(65% 0.005 264); /* #a1a1aa */
+    --color-neutral-content: oklch(10% 0 0);
+
+    --color-base-100: oklch(10% 0 0); /* #0a0a0a  — background */
+    --color-base-200: oklch(15% 0 0); /* #1a1a1a  — card       */
+    --color-base-300: oklch(19% 0 0); /* #27272a  — border     */
+    --color-base-content: oklch(96% 0 0); /* #f5f5f5  — foreground */
+
+    --color-info: oklch(69.6% 0.138 183.6);
+    --color-info-content: oklch(100% 0 0);
+    --color-success: oklch(68.8% 0.163 163.42);
+    --color-success-content: oklch(100% 0 0);
+    --color-warning: oklch(75% 0.183 66);
+    --color-warning-content: oklch(100% 0 0);
+    --color-error: oklch(63% 0.22 25); /* #f87171 */
+    --color-error-content: oklch(15% 0.08 25);
+
+    --radius-box: 0.625rem;
+    --radius-field: 0.5rem;
+    --radius-selector: 0.375rem;
+}
+
+/* ── Typography & body defaults ──────────────────────────────── */
+@layer base {
+    :root {
+        font-size: 16px;
+    }
+
+    body {
+        font-family:
+            "Inter",
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+    h2 {
+        font-size: 1.25rem;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+    h3 {
+        font-size: 1.125rem;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+    h4 {
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+
+    label {
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+    button {
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+    input {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+    }
+}
+
+/* =====================================================
+   USAGE
+   =====================================================
+
+   Apply themes via data-theme on <html>:
+     Light: <html data-theme="emerald-light">
+     Dark:  <html data-theme="emerald-dark">
+
+   Toggle with JS:
+     const toggle = () => {
+       const html = document.documentElement;
+       html.dataset.theme =
+         html.dataset.theme === "emerald-light" ? "emerald-dark" : "emerald-light";
+     };
+
+   Follow OS preference:
+     const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+     document.documentElement.dataset.theme =
+       dark ? "emerald-dark" : "emerald-light";
+
+   ===================================================== */
