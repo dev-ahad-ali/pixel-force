@@ -1,0 +1,166 @@
+---
+const testimonials = [
+  {
+    id: 1,
+    name: 'Sarah Johnson',
+    company: 'TechVision Inc.',
+    role: 'CEO',
+    avatar: 'https://images.unsplash.com/photo-1522199899308-2eef382e2158?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMGJ1c2luZXNzfGVufDF8fHx8MTc3MzIxMzUyNHww&ixlib=rb-4.1.0&q=80&w=400',
+    quote: 'DigitalCraft transformed our online presence completely. The team delivered beyond our expectations with a stunning website and effective marketing strategy.',
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: 'Michael Chen',
+    company: 'ShopHub',
+    role: 'Founder',
+    avatar: 'https://images.unsplash.com/photo-1656313869683-79707470819e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYW4lMjBjb3Jwb3JhdGV8ZW58MXx8fHwxNzczMjA5NzE1fDA&ixlib=rb-4.1.0&q=80&w=400',
+    quote: 'Our e-commerce sales doubled within 6 months of launching the new platform. The automation features they built save us countless hours every week.',
+    rating: 5,
+  },
+  {
+    id: 3,
+    name: 'Emily Rodriguez',
+    company: 'GreenLeaf Organics',
+    role: 'Marketing Director',
+    avatar: 'https://images.unsplash.com/photo-1689600944138-da3b150d9cb8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMGJ1c2luZXNzfGVufDF8fHx8MTc3MzE5NzI2OXww&ixlib=rb-4.1.0&q=80&w=400',
+    quote: 'The brand identity they created perfectly captures our organic values. Customer engagement has increased dramatically since the rebrand.',
+    rating: 5,
+  },
+];
+
+const stats = [
+  { value: '98%',  label: 'Client Satisfaction'  },
+  { value: '100+', label: 'Projects Completed'   },
+  { value: '50+',  label: 'Happy Clients'        },
+  { value: '5+',   label: 'Years Experience'     },
+];
+---
+
+<section id="testimonials" class="py-20 lg:py-32 px-6">
+  <div class="container mx-auto">
+
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 observe-fade-up">
+      <span class="badge badge-soft badge-primary text-sm font-medium px-4 py-3 rounded-full mb-4">
+        Testimonials
+      </span>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-6 text-base-content">
+        What Our Clients Say
+      </h2>
+      <p class="text-lg text-base-content/60">
+        Don't just take our word for it — hear from our satisfied clients
+      </p>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="grid md:grid-cols-3 gap-8">
+      {testimonials.map((t, index) => (
+        <div
+          class="observe-fade-up group"
+          style={`--delay: ${index * 100}ms`}
+        >
+          <div class="testimonial-card h-full bg-base-100 border border-base-300 rounded-2xl p-8
+                      hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+
+            <!-- Stars -->
+            <div class="flex gap-1 mb-6" aria-label={`${t.rating} out of 5 stars`}>
+              {Array.from({ length: t.rating }).map(() => (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 h-5 fill-primary text-primary"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              ))}
+            </div>
+
+            <!-- Quote -->
+            <p class="text-base-content/60 leading-relaxed mb-6 italic">
+              "{t.quote}"
+            </p>
+
+            <!-- Author -->
+            <div class="flex items-center gap-4 pt-6 border-t border-base-300">
+              <div class="avatar">
+                <div class="w-12 h-12 rounded-full ring ring-base-300 ring-offset-base-100 ring-offset-1">
+                  <img
+                    src={t.avatar}
+                    alt={t.name}
+                    loading="lazy"
+                    onerror={`this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=10b981&color=fff'`}
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="font-semibold text-base-content">{t.name}</div>
+                <div class="text-sm text-base-content/60">{t.role} at {t.company}</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Trust Badges -->
+    <div
+      class="mt-16 pt-16 border-t border-base-300 observe-fade-up"
+      style="--delay: 400ms"
+    >
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        {stats.map(({ value, label }, index) => (
+          <div
+            class="observe-fade-up"
+            style={`--delay: ${400 + index * 80}ms`}
+          >
+            <div class="text-3xl md:text-4xl font-bold text-primary mb-2">{value}</div>
+            <div class="text-sm text-base-content/60">{label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Card lift on hover */
+  .testimonial-card {
+    transform: translateY(0);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .group:hover .testimonial-card {
+    transform: translateY(-8px);
+  }
+
+  /* Scroll-triggered fade-up */
+  .observe-fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease calc(var(--delay, 0ms)),
+                transform 0.55s ease calc(var(--delay, 0ms));
+  }
+  .observe-fade-up.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        observer.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.12 }
+  );
+
+  document
+    .querySelectorAll('#testimonials .observe-fade-up')
+    .forEach((el) => observer.observe(el));
+</script>

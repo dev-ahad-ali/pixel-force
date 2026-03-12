@@ -1,0 +1,183 @@
+---
+const trustItems = [
+    "Free Consultation",
+    "Fast Response Time",
+    "No Commitment Required",
+];
+---
+
+<section id="contact" class="py-20 lg:py-32 px-6 relative overflow-hidden">
+    <!-- Background blobs -->
+    <div
+        class="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10"
+    >
+    </div>
+    <div
+        class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/10 blur-3xl"
+    >
+    </div>
+
+    <div class="container mx-auto relative z-10">
+        <div class="max-w-4xl mx-auto text-center observe-fade-up">
+            <!-- Glass card -->
+            <div
+                class="bg-base-100/50 backdrop-blur-sm border border-base-300 rounded-3xl p-10 md:p-16"
+            >
+                <!-- Badge -->
+                <div
+                    class="inline-block mb-6 observe-scale-pop"
+                    style="--delay: 200ms"
+                >
+                    <span
+                        class="badge badge-soft badge-primary text-sm font-medium px-4 py-3 rounded-full"
+                    >
+                        Let's Work Together
+                    </span>
+                </div>
+
+                <!-- Headline -->
+                <h2
+                    class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-base-content"
+                >
+                    Ready to Grow Your Business?
+                </h2>
+
+                <!-- Body -->
+                <p
+                    class="text-lg text-base-content/60 mb-10 max-w-2xl mx-auto leading-relaxed"
+                >
+                    Let's build something amazing together. Get in touch today
+                    and discover how we can help transform your digital presence
+                    and drive real results.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button
+                        id="cta-start-project"
+                        class="btn btn-primary btn-lg gap-2 group shadow-lg hover:shadow-primary/30 hover:shadow-xl transition-shadow"
+                    >
+                        Start Your Project
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                    </button>
+
+                    <a
+                        href="mailto:hello@digitalcraft.com"
+                        class="btn btn-outline btn-lg gap-2 border-2 hover:btn-primary group transition-all"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="w-5 h-5 text-primary group-hover:text-primary-content transition-colors duration-200"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                            ></path>
+                        </svg>
+                        Email Us
+                    </a>
+                </div>
+
+                <!-- Trust indicators -->
+                <div
+                    class="mt-12 pt-8 border-t border-base-300 observe-fade-up"
+                    style="--delay: 400ms"
+                >
+                    <div
+                        class="flex flex-wrap justify-center gap-8 text-sm text-base-content/60"
+                    >
+                        {
+                            trustItems.map((item) => (
+                                <div class="flex items-center gap-2">
+                                    <span class="text-primary font-semibold">
+                                        ✓
+                                    </span>
+                                    {item}
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Scroll-triggered fade-up */
+    .observe-fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+            opacity 0.6s ease calc(var(--delay, 0ms)),
+            transform 0.6s ease calc(var(--delay, 0ms));
+    }
+    .observe-fade-up.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Scale pop (badge) */
+    .observe-scale-pop {
+        opacity: 0;
+        transform: scale(0.8);
+        transition:
+            opacity 0.4s ease calc(var(--delay, 0ms)),
+            transform 0.4s ease calc(var(--delay, 0ms));
+    }
+    .observe-scale-pop.in-view {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Button press feedback */
+    #cta-start-project:active {
+        transform: scale(0.96);
+    }
+</style>
+
+<script>
+    // Scroll-triggered animations
+    const observer = new IntersectionObserver(
+        (entries) =>
+            entries.forEach((e) => {
+                if (e.isIntersecting) {
+                    e.target.classList.add("in-view");
+                    observer.unobserve(e.target);
+                }
+            }),
+        { threshold: 0.15 },
+    );
+
+    document
+        .querySelectorAll(
+            "#contact .observe-fade-up, #contact .observe-scale-pop",
+        )
+        .forEach((el) => observer.observe(el));
+
+    // Scroll to contact (same-page) or open a contact form if you have one
+    document
+        .getElementById("cta-start-project")
+        ?.addEventListener("click", () => {
+            document
+                .querySelector("#contact")
+                ?.scrollIntoView({ behavior: "smooth" });
+        });
+</script>
