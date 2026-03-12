@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <style>
+    @keyframes growBar {
+      from { transform: scaleY(0); }
+      to   { transform: scaleY(1); }
+    }
+    @keyframes drawLine {
+      from { stroke-dashoffset: 35; }
+      to   { stroke-dashoffset: 0; }
+    }
+    .bar-wrap {
+      transform-box: fill-box;
+      transform-origin: bottom;
+      animation: growBar 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .trend {
+      stroke-dasharray: 35;
+      stroke-dashoffset: 35;
+      animation: drawLine 1.4s ease 1s forwards;
+    }
+  </style>
+
+  <!-- Trend line path reversed: starts at bottom-left (2,15) goes to top-right (22,3) -->
+  <path class="trend" d="M2 15 6.647 10.354a.5.5 0 0 1 .707 0l3.292 3.292a.5.5 0 0 0 .708 0L22 3"/>
+
+  <!-- Col x=4  length=3 -->
+  <g class="bar-wrap" style="animation-delay: 0ms">
+    <path d="M4 18v3"/>
+  </g>
+  <!-- Col x=8  length=7 -->
+  <g class="bar-wrap" style="animation-delay: 200ms">
+    <path d="M8 14v7"/>
+  </g>
+  <!-- Col x=12 length=5 -->
+  <g class="bar-wrap" style="animation-delay: 400ms">
+    <path d="M12 16v5"/>
+  </g>
+  <!-- Col x=16 length=7 -->
+  <g class="bar-wrap" style="animation-delay: 600ms">
+    <path d="M16 14v7"/>
+  </g>
+  <!-- Col x=20 length=11 -->
+  <g class="bar-wrap" style="animation-delay: 800ms">
+    <path d="M20 10v11"/>
+  </g>
+</svg>

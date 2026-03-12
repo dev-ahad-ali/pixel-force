@@ -1,11 +1,9 @@
 ---
-const imageUrl =
-    "https://images.unsplash.com/photo-1575388902449-6bca946ad549?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBkYXNoYm9hcmQlMjBpbnRlcmZhY2UlMjBkYXJrfGVufDF8fHx8MTc3MzE5NTU0MHww&ixlib=rb-4.1.0&q=80&w=1080";
-
 const stats = [
-    { value: "100+", label: "Projects" },
-    { value: "50+", label: "Clients" },
-    { value: "5+", label: "Years" },
+    { value: "98%", label: "Client Satisfaction" },
+    { value: "100+", label: "Projects Completed" },
+    { value: "50+", label: "Happy Clients" },
+    { value: "5+", label: "Years Experience" },
 ];
 ---
 
@@ -19,15 +17,16 @@ const stats = [
                     <span
                         class="badge badge-soft badge-primary text-sm font-medium px-4 py-3 rounded-full"
                     >
-                        ✨ Modern Digital Solutions
+                        Modern Digital Solutions
                     </span>
                 </div>
 
                 <!-- Headline -->
                 <h1
-                    class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight hero-heading"
+                    class="text-4xl md:text-5xl lg:text-6xl font-bold hero-heading"
                 >
                     We Build Digital Experiences That{" "}
+                    <br />
                     <span
                         class="text-transparent bg-clip-text bg-linear-to-r from-primary to-accent"
                     >
@@ -84,24 +83,6 @@ const stats = [
                         View Our Work
                     </button>
                 </div>
-
-                <!-- Stats -->
-                <div
-                    class="grid grid-cols-3 gap-6 pt-8 border-t border-base-300 hero-stats"
-                >
-                    {
-                        stats.map(({ value, label }) => (
-                            <div>
-                                <div class="text-3xl font-bold text-primary">
-                                    {value}
-                                </div>
-                                <div class="text-sm text-base-content/60 mt-1">
-                                    {label}
-                                </div>
-                            </div>
-                        ))
-                    }
-                </div>
             </div>
 
             <!-- ── Right Visual ──────────────────────────────────── -->
@@ -113,11 +94,11 @@ const stats = [
                 </div>
 
                 <!-- Main image -->
-                <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                <div class="relative rounded-2xl overflow-hidden">
                     <img
-                        src={imageUrl}
+                        src={"/hero.svg"}
                         alt="Modern Dashboard Interface"
-                        class="w-full h-auto block"
+                        class="w-full max-h-125 block"
                         loading="eager"
                         onerror="this.src='https://placehold.co/1080x720/1a1a1a/10b981?text=DigitalCraft'"
                     />
@@ -176,6 +157,30 @@ const stats = [
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div
+            class="mt-16 pt-16 border-t border-base-300 observe-fade-up"
+            style="--delay: 400ms"
+        >
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                {
+                    stats.map(({ value, label }, index) => (
+                        <div
+                            class="observe-fade-up"
+                            style={`--delay: ${400 + index * 80}ms`}
+                        >
+                            <div class="text-3xl md:text-4xl font-bold text-primary mb-2">
+                                {value}
+                            </div>
+                            <div class="text-sm text-base-content/60">
+                                {label}
+                            </div>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     </div>

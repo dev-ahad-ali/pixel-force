@@ -29,12 +29,6 @@ const testimonials = [
   },
 ];
 
-const stats = [
-  { value: '98%',  label: 'Client Satisfaction'  },
-  { value: '100+', label: 'Projects Completed'   },
-  { value: '50+',  label: 'Happy Clients'        },
-  { value: '5+',   label: 'Years Experience'     },
-];
 ---
 
 <section id="testimonials" class="py-20 lg:py-32 px-6">
@@ -104,25 +98,6 @@ const stats = [
         </div>
       ))}
     </div>
-
-    <!-- Trust Badges -->
-    <div
-      class="mt-16 pt-16 border-t border-base-300 observe-fade-up"
-      style="--delay: 400ms"
-    >
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-        {stats.map(({ value, label }, index) => (
-          <div
-            class="observe-fade-up"
-            style={`--delay: ${400 + index * 80}ms`}
-          >
-            <div class="text-3xl md:text-4xl font-bold text-primary mb-2">{value}</div>
-            <div class="text-sm text-base-content/60">{label}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-
   </div>
 </section>
 

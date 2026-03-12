@@ -39,7 +39,7 @@ const navLinks = [
                     navLinks.map((link) => (
                         <button
                             data-href={link.href}
-                            class="nav-link btn btn-ghost btn-sm text-base-content/80 hover:text-primary font-normal"
+                            class="nav-link btn btn-ghost btn-sm text-base text-base-content/80 hover:text-primary font-normal"
                         >
                             {link.name}
                         </button>
@@ -52,7 +52,7 @@ const navLinks = [
                 <!-- Theme Toggle -->
                 <button
                     id="theme-toggle"
-                    class="btn btn-ghost btn-sm btn-square"
+                    class="btn btn-ghost btn-square"
                     aria-label="Toggle theme"
                 >
                     <!-- Sun icon (shown in dark mode) -->
@@ -95,7 +95,7 @@ const navLinks = [
                 <!-- CTA Button — Desktop -->
                 <button
                     data-href="#contact"
-                    class="nav-link hidden lg:flex btn btn-primary btn-sm px-5 shadow-sm hover:shadow-primary/30 hover:shadow-md transition-shadow"
+                    class="nav-link hidden lg:flex btn btn-primary text-base px-5 shadow-sm hover:shadow-primary/30 hover:shadow-md transition-shadow"
                 >
                     Start a Project
                 </button>
@@ -203,10 +203,10 @@ const navLinks = [
 <style>
     /* Scrolled state applied via JS */
     #site-header.scrolled {
-        background-color: oklch(var(--b1) / 0.85);
+        /*background-color: oklch(var(--b1) / 0.85);*/
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid oklch(var(--b3));
+        /*border-bottom: 1px solid oklch(var(--b3));*/
         box-shadow: 0 1px 3px oklch(0 0 0 / 0.05);
     }
 
