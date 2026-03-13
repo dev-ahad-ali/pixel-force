@@ -45,7 +45,7 @@ const categories = [
 ];
 ---
 
-<section id="projects" class="py-20 lg:py-32 px-6">
+<section id="projects" class="py-20 lg:py-32 px-5">
     <div class="container mx-auto">
         <!-- Section Header -->
         <div class="text-center max-w-3xl mx-auto mb-16 observe-fade-up">
@@ -65,7 +65,9 @@ const categories = [
             </p>
         </div>
 
-        <div class="join w-full justify-center mb-12 tab-btns">
+        <div
+            class="join w-full justify-center mb-12 tab-btns overflow-x-scroll md:overflow-x-hidden"
+        >
             {
                 categories.map((item, idx) => (
                     <button
