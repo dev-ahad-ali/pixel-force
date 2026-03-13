@@ -1,4 +1,6 @@
 ---
+import { render } from "astro:content";
+
 interface KeyResult {
     metric: string;
     value: string;
@@ -18,15 +20,13 @@ interface Project {
     publishedAt: Date;
 }
 
-interface Props {
-    data: { data: Project };
-    index: number;
-}
-
 const { data, index } = Astro.props;
 const project = data.data;
 
-// Serialize project data safely for the data attribute
+// Render markdown body to HTML at build time
+const { Content } = await render(data);
+
+// Serialize only frontmatter for the modal script
 const projectJson = JSON.stringify(project);
 ---
 
@@ -35,10 +35,18 @@ const projectJson = JSON.stringify(project);
     style={`--delay: ${index * 100}ms`}
     data-project={projectJson}
 >
+    <!--
+        Hidden <template> tag: Astro renders <Content /> to real HTML here at
+        build time. The modal script reads .innerHTML at click time and injects
+        it — no client-side markdown parsing needed.
+    -->
+    <template class="project-case-study">
+        <Content />
+    </template>
+
     <div
         class="card-inner relative overflow-hidden rounded-2xl bg-base-100 border border-base-300 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5"
     >
-        <!-- Image -->
         <figure class="relative aspect-4/3 overflow-hidden">
             <img
                 src={project.image}
@@ -58,7 +66,6 @@ const projectJson = JSON.stringify(project);
             </div>
         </figure>
 
-        <!-- Content -->
         <div class="p-6">
             <h3
                 class="text-xl font-semibold mb-2 transition-colors duration-200 group-hover:text-primary text-base-content"

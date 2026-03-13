@@ -1,5 +1,7 @@
 ---
-
+// ProjectModal.astro
+// Place this component ONCE — in your layout or the page that renders project cards.
+// It must appear in the DOM only one time.
 ---
 
 <dialog id="project-modal" class="modal modal-bottom sm:modal-middle">
@@ -127,6 +129,30 @@
                     <div id="detail-results" class="grid sm:grid-cols-2 gap-4">
                     </div>
                 </div>
+
+                <!-- Case Study (rendered markdown body) -->
+                <div>
+                    <div class="divider"></div>
+                    <h4 class="font-semibold mb-4 text-base-content">
+                        Case Study
+                    </h4>
+                    <div
+                        id="detail-case-study"
+                        class="prose prose-sm max-w-none
+                               prose-headings:text-base-content
+                               prose-headings:font-semibold
+                               prose-p:text-base-content/70
+                               prose-p:leading-relaxed
+                               prose-strong:text-base-content
+                               prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+                               prose-code:text-primary prose-code:bg-base-200 prose-code:px-1 prose-code:rounded
+                               prose-pre:bg-base-200 prose-pre:border prose-pre:border-base-300
+                               prose-blockquote:border-l-primary prose-blockquote:text-base-content/60
+                               prose-li:text-base-content/70
+                               prose-hr:border-base-300"
+                    >
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -197,6 +223,7 @@
     const detailServices = document.getElementById("detail-services")!;
     const detailTechnologies = document.getElementById("detail-technologies")!;
     const detailResults = document.getElementById("detail-results")!;
+    const detailCaseStudy = document.getElementById("detail-case-study")!;
     const modalClose = document.getElementById("modal-close")!;
 
     // ── Tab switching ─────────────────────────────────────────────
@@ -212,7 +239,7 @@
     tabDetails.addEventListener("click", () => switchTab("details"));
 
     // ── Populate modal with project data ──────────────────────────
-    const populateModal = (project: Project) => {
+    const populateModal = (project: Project, caseStudyHTML: string) => {
         // Header
         modalTitle.textContent = project.title;
 
@@ -254,11 +281,14 @@
                 </div>`,
             )
             .join("");
+
+        // Case study — pre-rendered markdown HTML from the card's <template>
+        detailCaseStudy.innerHTML = caseStudyHTML;
     };
 
     // ── Open modal on card click ──────────────────────────────────
-    const openModal = (project: Project) => {
-        populateModal(project);
+    const openModal = (project: Project, caseStudyHTML: string) => {
+        populateModal(project, caseStudyHTML);
         switchTab("preview"); // always reset to preview tab
         modal?.showModal();
     };
@@ -271,9 +301,16 @@
                 card.addEventListener("click", () => {
                     const raw = card.dataset.project;
                     if (!raw) return;
+
+                    // Read the pre-rendered markdown HTML from the hidden <template>
+                    const tmpl = card.querySelector<HTMLTemplateElement>(
+                        "template.project-case-study",
+                    );
+                    const caseStudyHTML = tmpl ? tmpl.innerHTML : "";
+
                     try {
                         const project: Project = JSON.parse(raw);
-                        openModal(project);
+                        openModal(project, caseStudyHTML);
                     } catch (e) {
                         console.error("Failed to parse project data:", e);
                     }
