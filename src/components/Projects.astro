@@ -1,5 +1,10 @@
 ---
-const categories = ["React.Js", "Next.Js", "Wordpress", "Astro"];
+const categories = [
+    "Web Development",
+    "Digital Marketings",
+    "Logo & Brand Design",
+    "AI Automation",
+];
 ---
 
 <section id="projects" class="py-20 lg:py-32 px-6">
@@ -22,11 +27,11 @@ const categories = ["React.Js", "Next.Js", "Wordpress", "Astro"];
             </p>
         </div>
 
-        <div class="join w-full justify-center mb-12">
+        <div class="join w-full justify-center mb-12 tab-btns">
             {
                 categories.map((item, idx) => (
                     <button
-                        class={`btn join-item ${idx === 0 ? "btn-primary" : ""}`}
+                        class={`project-tab-btn btn join-item ${idx === 0 ? "btn-primary project-tab-active" : ""}`}
                         data-category={item}
                     >
                         {item}
@@ -36,23 +41,70 @@ const categories = ["React.Js", "Next.Js", "Wordpress", "Astro"];
         </div>
 
         <!-- Projects Grid -->
-        <div class="grid md:grid-cols-3 gap-8"></div>
+        <div
+            id={categories[0]}
+            class="hidden md:grid-cols-3 gap-8 project-grid"
+        >
+            <h2>dev 1</h2>
+            <h2>dev 2</h2>
+            <h2>dev 3</h2>
+        </div>
+        <div
+            id={categories[1]}
+            class="md:grid-cols-3 gap-8 hidden project-grid"
+        >
+            <h2>Marketing 1</h2>
+            <h2>Marketing 2</h2>
+            <h2>Marketing 3</h2>
+        </div>
+        <div
+            id={categories[2]}
+            class="md:grid-cols-3 gap-8 hidden project-grid"
+        >
+            <h2>Design 1</h2>
+            <h2>Design 2</h2>
+            <h2>Design 3</h2>
+        </div>
+        <div
+            id={categories[3]}
+            class="md:grid-cols-3 gap-8 hidden project-grid"
+        >
+            <h2>Ai 1</h2>
+            <h2>Ai 2</h2>
+            <h2>Ai 3</h2>
+        </div>
     </div>
 </section>
 
 <script>
-    const btns = document.getElementsByClassName("btn");
-    for (let btn of btns) {
-        btn.addEventListener("click", () => {
-            console.log(btn.getAttribute("data-category"));
+    const btns = document.querySelectorAll(
+        ".project-tab-btn",
+    ) as NodeListOf<HTMLElement>;
 
-            for (let btn of btns) {
-                if (btn.classList.contains("btn-primary")) {
-                    btn.classList.remove("btn-primary");
-                }
-            }
+    const contents = document.querySelectorAll(".project-grid");
 
-            btn.classList.add("btn-primary");
+    function showTabContent(activeCategory: string) {
+        contents.forEach((content) => {
+            const isActive = content.id === activeCategory;
+            content.classList.toggle("hidden", !isActive);
+            content.classList.toggle("grid", isActive);
         });
     }
+
+    document.querySelector(".tab-btns")?.addEventListener("click", (e) => {
+        const btn = (e.target as HTMLElement)?.closest(
+            ".project-tab-btn",
+        ) as HTMLElement | null;
+
+        if (!btn) return;
+
+        btns.forEach((b) =>
+            b.classList.remove("btn-primary", "project-tab-active"),
+        );
+        btn.classList.add("btn-primary", "project-tab-active");
+
+        showTabContent(btn.dataset.category || "");
+    });
+
+    showTabContent(btns[0]?.dataset.category || "");
 </script>
