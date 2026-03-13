@@ -1,12 +1,39 @@
 ---
+interface KeyResult {
+    metric: string;
+    value: string;
+    description: string;
+}
+
+interface Project {
+    title: string;
+    overview: string;
+    client: string;
+    image: string;
+    category: string;
+    services: string[];
+    technologies: string[];
+    keyResults: KeyResult[];
+    featured: boolean;
+    publishedAt: Date;
+}
+
+interface Props {
+    data: { data: Project };
+    index: number;
+}
+
 const { data, index } = Astro.props;
 const project = data.data;
+
+// Serialize project data safely for the data attribute
+const projectJson = JSON.stringify(project);
 ---
 
 <div
     class="observe-fade-up group cursor-pointer project-card"
     style={`--delay: ${index * 100}ms`}
-    data-project-id={project.id}
+    data-project={projectJson}
 >
     <div
         class="card-inner relative overflow-hidden rounded-2xl bg-base-100 border border-base-300 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5"
@@ -18,14 +45,12 @@ const project = data.data;
                 alt={project.title}
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
-                onerror="this.src='https://placehold.co/800x600/1a1a1a/10b981?text=' + encodeURIComponent(this.alt)"
+                onerror={`this.src='https://placehold.co/800x600/1a1a1a/10b981?text=' + encodeURIComponent('${project.title}')`}
             />
-            <!-- Overlay on hover -->
             <div
                 class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
             >
             </div>
-            <!-- Category badge -->
             <div class="absolute top-4 right-4">
                 <span class="badge badge-primary text-white text-sm"
                     >{project.category}</span
@@ -47,129 +72,7 @@ const project = data.data;
     </div>
 </div>
 
-<!-- Modal--------->
-<dialog id="project-modal" class="modal modal-bottom sm:modal-middle">
-    <div
-        class="modal-box w-full max-w-4xl max-h-[90vh] p-0 overflow-hidden bg-base-100 border border-base-300 rounded-2xl"
-    >
-        <!-- Modal Header -->
-        <div
-            class="flex items-center justify-between px-6 py-4 border-b border-base-300"
-        >
-            <h3
-                id="modal-title"
-                class="text-2xl font-semibold text-base-content"
-            >
-            </h3>
-            <button id="modal-close" class="btn btn-ghost btn-sm btn-square">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="w-5 h-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        </div>
-
-        <!-- Tabs -->
-        <div
-            role="tablist"
-            class="tabs tabs-border border-b border-base-300 w-full rounded-none"
-        >
-            <button
-                role="tab"
-                id="tab-preview"
-                class="tab flex-1 font-medium tab-active"
-                data-tab="preview">Preview</button
-            >
-            <button
-                role="tab"
-                id="tab-details"
-                class="tab flex-1 font-medium"
-                data-tab="details">Details</button
-            >
-        </div>
-
-        <!-- Tab Content -->
-        <div class="overflow-y-auto max-h-[calc(90vh-160px)]">
-            <!-- Preview Panel -->
-            <div id="panel-preview" class="p-6">
-                <div class="rounded-xl overflow-hidden">
-                    <img
-                        id="modal-image"
-                        src=""
-                        alt=""
-                        class="w-full h-auto block"
-                    />
-                </div>
-            </div>
-
-            <!-- Details Panel -->
-            <div id="panel-details" class="hidden p-6 space-y-6">
-                <div>
-                    <h4 class="font-semibold mb-2 text-base-content">
-                        Project Overview
-                    </h4>
-                    <p id="detail-description" class="text-base-content/60"></p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-semibold mb-1 text-base-content">
-                            Client
-                        </h4>
-                        <p id="detail-client" class="text-base-content/60"></p>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold mb-1 text-base-content">
-                            Industry
-                        </h4>
-                        <p id="detail-industry" class="text-base-content/60">
-                        </p>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="font-semibold mb-2 text-base-content">
-                        Services Provided
-                    </h4>
-                    <div id="detail-services" class="flex flex-wrap gap-2">
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="font-semibold mb-2 text-base-content">
-                        Technologies Used
-                    </h4>
-                    <div id="detail-technologies" class="flex flex-wrap gap-2">
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="font-semibold mb-3 text-base-content">
-                        Key Results
-                    </h4>
-                    <ul id="detail-results" class="space-y-2"></ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Click-outside to close -->
-    <form method="dialog" class="modal-backdrop">
-        <button>close</button>
-    </form>
-</dialog>
-
 <style>
-    /* Card lift on hover */
     .card-inner {
         transform: translateY(0);
         transition:
@@ -181,7 +84,6 @@ const project = data.data;
         transform: translateY(-8px);
     }
 
-    /* Scroll-triggered fade-up */
     .observe-fade-up {
         opacity: 0;
         transform: translateY(24px);
@@ -193,63 +95,4 @@ const project = data.data;
         opacity: 1;
         transform: translateY(0);
     }
-
-    /* Active tab styling */
-    .tab-active {
-        color: oklch(var(--p));
-        border-bottom: 2px solid oklch(var(--p));
-    }
-
-    /* Modal entrance */
-    dialog[open] .modal-box {
-        animation: modalIn 0.25s ease both;
-    }
-    @keyframes modalIn {
-        from {
-            opacity: 0;
-            transform: scale(0.94) translateY(16px);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
-    }
 </style>
-
-<script>
-    // ── IntersectionObserver: scroll fade-up ─────────────────────
-    const observer = new IntersectionObserver(
-        (entries) =>
-            entries.forEach((e) => {
-                if (e.isIntersecting) {
-                    e.target.classList.add("in-view");
-                    observer.unobserve(e.target);
-                }
-            }),
-        { threshold: 0.12 },
-    );
-    document
-        .querySelectorAll("#projects .observe-fade-up")
-        .forEach((el) => observer.observe(el));
-
-    // ── Modal logic ───────────────────────────────────────────────
-    const modal = document.getElementById("project-modal");
-    const modalTitle = document.getElementById("modal-title");
-    const modalImage = document.getElementById("modal-image");
-    const panelPreview = document.getElementById("panel-preview");
-    const panelDetails = document.getElementById("panel-details");
-    const tabPreview = document.getElementById("tab-preview");
-    const tabDetails = document.getElementById("tab-details");
-
-    // Tab switching
-    const switchTab = (tab: string) => {
-        const isPreview = tab === "preview";
-        panelPreview?.classList.toggle("hidden", !isPreview);
-        panelDetails?.classList.toggle("hidden", isPreview);
-        tabPreview?.classList.toggle("tab-active", isPreview);
-        tabDetails?.classList.toggle("tab-active", !isPreview);
-    };
-
-    tabPreview?.addEventListener("click", () => switchTab("preview"));
-    tabDetails?.addEventListener("click", () => switchTab("details"));
-</script>

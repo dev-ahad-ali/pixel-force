@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
+import ProjectModal from "../components/ui/ProjectModal.astro";
 interface Project {
     title: string;
     overview: string;
@@ -119,6 +120,7 @@ const categories = [
             }
         </div>
     </div>
+    <ProjectModal />
 </section>
 
 <script>

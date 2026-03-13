@@ -1,0 +1,304 @@
+---
+
+---
+
+<dialog id="project-modal" class="modal modal-bottom sm:modal-middle">
+    <div
+        class="modal-box w-full max-w-4xl max-h-[90vh] p-0 overflow-hidden bg-base-100 border border-base-300 rounded-2xl"
+    >
+        <!-- Header -->
+        <div
+            class="flex items-center justify-between px-6 py-4 border-b border-base-300"
+        >
+            <h3
+                id="modal-title"
+                class="text-2xl font-semibold text-base-content truncate pr-4"
+            >
+            </h3>
+            <button
+                id="modal-close"
+                class="btn btn-ghost btn-sm btn-square shrink-0"
+                aria-label="Close modal"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Tabs -->
+        <div
+            role="tablist"
+            class="tabs tabs-border border-b border-base-300 w-full rounded-none"
+        >
+            <button
+                role="tab"
+                id="tab-preview"
+                class="tab flex-1 font-medium tab-active"
+                data-tab="preview">Preview</button
+            >
+            <button
+                role="tab"
+                id="tab-details"
+                class="tab flex-1 font-medium"
+                data-tab="details">Details</button
+            >
+        </div>
+
+        <!-- Scrollable body -->
+        <div class="overflow-y-auto max-h-[calc(90vh-160px)]">
+            <!-- Preview Panel -->
+            <div id="panel-preview" class="p-6">
+                <div class="rounded-xl overflow-hidden bg-base-200">
+                    <img
+                        id="modal-image"
+                        src=""
+                        alt=""
+                        class="w-full h-auto block"
+                        onerror="this.src='https://placehold.co/800x600/1a1a1a/10b981?text=Preview'"
+                    />
+                </div>
+            </div>
+
+            <!-- Details Panel -->
+            <div id="panel-details" class="hidden p-6 space-y-6">
+                <!-- Overview -->
+                <div>
+                    <h4 class="font-semibold mb-2 text-base-content">
+                        Project Overview
+                    </h4>
+                    <p
+                        id="detail-description"
+                        class="text-base-content/60 leading-relaxed"
+                    >
+                    </p>
+                </div>
+
+                <!-- Client / Category -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold mb-1 text-base-content">
+                            Client
+                        </h4>
+                        <p id="detail-client" class="text-base-content/60"></p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-1 text-base-content">
+                            Category
+                        </h4>
+                        <p id="detail-category" class="text-base-content/60">
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="font-semibold mb-2 text-base-content">
+                        Services Provided
+                    </h4>
+                    <div id="detail-services" class="flex flex-wrap gap-2">
+                    </div>
+                </div>
+
+                <!-- Technologies -->
+                <div>
+                    <h4 class="font-semibold mb-2 text-base-content">
+                        Technologies Used
+                    </h4>
+                    <div id="detail-technologies" class="flex flex-wrap gap-2">
+                    </div>
+                </div>
+
+                <!-- Key Results -->
+                <div>
+                    <h4 class="font-semibold mb-3 text-base-content">
+                        Key Results
+                    </h4>
+                    <div id="detail-results" class="grid sm:grid-cols-2 gap-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Backdrop click closes -->
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
+
+<style>
+    /* Active tab */
+    .tab-active {
+        color: oklch(var(--p));
+        border-bottom: 2px solid oklch(var(--p));
+    }
+
+    /* Modal entrance animation */
+    dialog[open] .modal-box {
+        animation: modalIn 0.25s ease both;
+    }
+    @keyframes modalIn {
+        from {
+            opacity: 0;
+            transform: scale(0.94) translateY(16px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+</style>
+
+<script>
+    // ── Types ─────────────────────────────────────────────────────
+    interface KeyResult {
+        metric: string;
+        value: string;
+        description: string;
+    }
+
+    interface Project {
+        title: string;
+        overview: string;
+        client: string;
+        image: string;
+        category: string;
+        services: string[];
+        technologies: string[];
+        keyResults: KeyResult[];
+    }
+
+    // ── Element refs ──────────────────────────────────────────────
+    const modal = document.getElementById(
+        "project-modal",
+    ) as HTMLDialogElement | null;
+    const modalTitle = document.getElementById("modal-title")!;
+    const modalImage = document.getElementById(
+        "modal-image",
+    ) as HTMLImageElement;
+    const panelPreview = document.getElementById("panel-preview")!;
+    const panelDetails = document.getElementById("panel-details")!;
+    const tabPreview = document.getElementById("tab-preview")!;
+    const tabDetails = document.getElementById("tab-details")!;
+    const detailDescription = document.getElementById("detail-description")!;
+    const detailClient = document.getElementById("detail-client")!;
+    const detailCategory = document.getElementById("detail-category")!;
+    const detailServices = document.getElementById("detail-services")!;
+    const detailTechnologies = document.getElementById("detail-technologies")!;
+    const detailResults = document.getElementById("detail-results")!;
+    const modalClose = document.getElementById("modal-close")!;
+
+    // ── Tab switching ─────────────────────────────────────────────
+    const switchTab = (tab: "preview" | "details") => {
+        const isPreview = tab === "preview";
+        panelPreview.classList.toggle("hidden", !isPreview);
+        panelDetails.classList.toggle("hidden", isPreview);
+        tabPreview.classList.toggle("tab-active", isPreview);
+        tabDetails.classList.toggle("tab-active", !isPreview);
+    };
+
+    tabPreview.addEventListener("click", () => switchTab("preview"));
+    tabDetails.addEventListener("click", () => switchTab("details"));
+
+    // ── Populate modal with project data ──────────────────────────
+    const populateModal = (project: Project) => {
+        // Header
+        modalTitle.textContent = project.title;
+
+        // Image
+        modalImage.src = project.image;
+        modalImage.alt = project.title;
+
+        // Overview
+        detailDescription.textContent = project.overview;
+
+        // Client & category
+        detailClient.textContent = project.client;
+        detailCategory.textContent = project.category;
+
+        // Services — badges
+        detailServices.innerHTML = project.services
+            .map(
+                (s) =>
+                    `<span class="badge badge-outline badge-primary text-sm px-3 py-1">${s}</span>`,
+            )
+            .join("");
+
+        // Technologies — badges
+        detailTechnologies.innerHTML = project.technologies
+            .map(
+                (t) =>
+                    `<span class="badge badge-ghost text-sm px-3 py-1">${t}</span>`,
+            )
+            .join("");
+
+        // Key results — metric cards
+        detailResults.innerHTML = project.keyResults
+            .map(
+                (r) => `
+                <div class="bg-base-200 rounded-xl p-4 flex flex-col gap-1">
+                    <span class="text-2xl font-bold text-primary">${r.value}</span>
+                    <span class="text-sm font-semibold text-base-content">${r.metric}</span>
+                    <span class="text-xs text-base-content/50">${r.description}</span>
+                </div>`,
+            )
+            .join("");
+    };
+
+    // ── Open modal on card click ──────────────────────────────────
+    const openModal = (project: Project) => {
+        populateModal(project);
+        switchTab("preview"); // always reset to preview tab
+        modal?.showModal();
+    };
+
+    // Attach click listeners to every project card
+    const attachCardListeners = () => {
+        document
+            .querySelectorAll<HTMLElement>(".project-card")
+            .forEach((card) => {
+                card.addEventListener("click", () => {
+                    const raw = card.dataset.project;
+                    if (!raw) return;
+                    try {
+                        const project: Project = JSON.parse(raw);
+                        openModal(project);
+                    } catch (e) {
+                        console.error("Failed to parse project data:", e);
+                    }
+                });
+            });
+    };
+
+    attachCardListeners();
+
+    // ── Close button ──────────────────────────────────────────────
+    modalClose.addEventListener("click", () => modal?.close());
+
+    // ── Scroll fade-up observer ───────────────────────────────────
+    const fadeObserver = new IntersectionObserver(
+        (entries) =>
+            entries.forEach((e) => {
+                if (e.isIntersecting) {
+                    e.target.classList.add("in-view");
+                    fadeObserver.unobserve(e.target);
+                }
+            }),
+        { threshold: 0.12 },
+    );
+
+    document
+        .querySelectorAll(".observe-fade-up")
+        .forEach((el) => fadeObserver.observe(el));
+</script>
