@@ -27,6 +27,7 @@ const categories = ["React.Js", "Next.Js", "Wordpress", "Astro"];
                 categories.map((item, idx) => (
                     <button
                         class={`btn join-item ${idx === 0 ? "btn-primary" : ""}`}
+                        data-category={item}
                     >
                         {item}
                     </button>
@@ -38,3 +39,20 @@ const categories = ["React.Js", "Next.Js", "Wordpress", "Astro"];
         <div class="grid md:grid-cols-3 gap-8"></div>
     </div>
 </section>
+
+<script>
+    const btns = document.getElementsByClassName("btn");
+    for (let btn of btns) {
+        btn.addEventListener("click", () => {
+            console.log(btn.getAttribute("data-category"));
+
+            for (let btn of btns) {
+                if (btn.classList.contains("btn-primary")) {
+                    btn.classList.remove("btn-primary");
+                }
+            }
+
+            btn.classList.add("btn-primary");
+        });
+    }
+</script>
