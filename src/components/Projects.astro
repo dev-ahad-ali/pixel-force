@@ -1,333 +1,40 @@
 ---
-interface Project {
-  id: number;
-  title: string;
-  category: string;
-  image: string;
-  client: string;
-  industry: string;
-  services: string[];
-  technologies: string[];
-  description: string;
-  results: string[];
-}
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: 'TechVision Portfolio',
-    category: 'Website',
-    image: 'https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHBvcnRmb2xpbyUyMHdlYnNpdGUlMjBtb2NrdXB8ZW58MXx8fHwxNzczMjE3MTM1fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    client: 'TechVision Inc.',
-    industry: 'Technology',
-    services: ['Website Development', 'SEO Optimization'],
-    technologies: ['React', 'Next.js', 'Tailwind CSS'],
-    description: 'A modern portfolio website showcasing innovative tech solutions with smooth animations and exceptional user experience.',
-    results: ['150% increase in organic traffic', '45% higher conversion rate', '3x faster page load times'],
-  },
-  {
-    id: 2,
-    title: 'ShopHub E-commerce',
-    category: 'Website',
-    image: 'https://images.unsplash.com/photo-1694599048261-a1de00f0117e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjB3ZWJzaXRlJTIwZGVzaWdufGVufDF8fHx8MTc3MzE4MjIwNHww&ixlib=rb-4.1.0&q=80&w=1080',
-    client: 'ShopHub',
-    industry: 'E-commerce',
-    services: ['Website Development', 'Conversion Optimization', 'Digital Marketing'],
-    technologies: ['Shopify', 'React', 'Node.js'],
-    description: 'Complete e-commerce platform with advanced product filtering, secure checkout, and inventory management.',
-    results: ['200% sales increase in 6 months', '60% reduction in cart abandonment', '4.8/5 customer satisfaction'],
-  },
-  {
-    id: 3,
-    title: 'FinanceApp Mobile',
-    category: 'Website',
-    image: 'https://images.unsplash.com/photo-1661246627162-feb0269e0c07?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBpbnRlcmZhY2UlMjBkZXNpZ258ZW58MXx8fHwxNzczMTg3OTg1fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    client: 'FinanceApp',
-    industry: 'Financial Services',
-    services: ['Website Development', 'AI Automation'],
-    technologies: ['React', 'OpenAI', 'Node.js'],
-    description: 'AI-powered financial management platform with intelligent budgeting and automated expense tracking.',
-    results: ['50k+ active users', '95% user retention rate', 'Featured in App Store'],
-  },
-];
-
-const categories =[
-    'React.Js',
-    'Next.Js',
-    'Wordpress',
-    'Astro',
-]
+const categories = ["React.Js", "Next.Js", "Wordpress", "Astro"];
 ---
 
 <section id="projects" class="py-20 lg:py-32 px-6">
-  <div class="container mx-auto">
-
-    <!-- Section Header -->
-    <div class="text-center max-w-3xl mx-auto mb-16 observe-fade-up">
-      <span class="badge badge-soft badge-primary text-sm font-medium px-4 py-3 rounded-full mb-4">
-        Our Work
-      </span>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-6 text-base-content">
-        Featured Projects
-      </h2>
-      <p class="text-lg text-base-content/60">
-        Explore our portfolio of successful projects that delivered exceptional results
-      </p>
-    </div>
+    <div class="container mx-auto">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16 observe-fade-up">
+            <span
+                class="badge badge-soft badge-primary text-sm font-medium px-4 py-3 rounded-full mb-4"
+            >
+                Our Work
+            </span>
+            <h2
+                class="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-6 text-base-content"
+            >
+                Featured Projects
+            </h2>
+            <p class="text-lg text-base-content/60">
+                Explore our portfolio of successful projects that delivered
+                exceptional results
+            </p>
+        </div>
 
         <div class="join w-full justify-center mb-12">
-            {categories.map((item, idx) => (
-                <button class={`btn join-item ${idx === 0 ? "btn-primary" : ""}`}>{item}</button>
-            ))}
+            {
+                categories.map((item, idx) => (
+                    <button
+                        class={`btn join-item ${idx === 0 ? "btn-primary" : ""}`}
+                    >
+                        {item}
+                    </button>
+                ))
+            }
         </div>
 
-    <!-- Projects Grid -->
-    <div class="grid md:grid-cols-3 gap-8">
-      {projects.map((project, index) => (
-        <div
-          class="observe-fade-up group cursor-pointer project-card"
-          style={`--delay: ${index * 100}ms`}
-          data-project-id={project.id}
-        >
-          <div class="card-inner relative overflow-hidden rounded-2xl bg-base-100 border border-base-300 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5">
-
-            <!-- Image -->
-            <figure class="relative aspect-4/3 overflow-hidden">
-              <img
-                src={project.image}
-                alt={project.title}
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                loading="lazy"
-                onerror="this.src='https://placehold.co/800x600/1a1a1a/10b981?text=' + encodeURIComponent(this.alt)"
-              />
-              <!-- Overlay on hover -->
-              <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              <!-- Category badge -->
-              <div class="absolute top-4 right-4">
-                <span class="badge badge-primary text-white text-sm">{project.category}</span>
-              </div>
-            </figure>
-
-            <!-- Content -->
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2 transition-colors duration-200 group-hover:text-primary text-base-content">
-                {project.title}
-              </h3>
-              <p class="text-base-content/60 text-sm">
-                {project.description.substring(0, 100)}...
-              </p>
-            </div>
-
-          </div>
-        </div>
-      ))}
+        <!-- Projects Grid -->
+        <div class="grid md:grid-cols-3 gap-8"></div>
     </div>
-
-  </div>
 </section>
-
-<!-- ── Modal  ──────────────────────────────────── -->
-<dialog id="project-modal" class="modal modal-bottom sm:modal-middle">
-  <div class="modal-box w-full max-w-4xl max-h-[90vh] p-0 overflow-hidden bg-base-100 border border-base-300 rounded-2xl">
-
-    <!-- Modal Header -->
-    <div class="flex items-center justify-between px-6 py-4 border-b border-base-300">
-      <h3 id="modal-title" class="text-2xl font-semibold text-base-content"></h3>
-      <button id="modal-close" class="btn btn-ghost btn-sm btn-square">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
-    </div>
-
-    <!-- Tabs -->
-    <div role="tablist" class="tabs tabs-border border-b border-base-300 w-full rounded-none">
-      <button
-        role="tab"
-        id="tab-preview"
-        class="tab flex-1 font-medium tab-active"
-        data-tab="preview"
-      >Preview</button>
-      <button
-        role="tab"
-        id="tab-details"
-        class="tab flex-1 font-medium"
-        data-tab="details"
-      >Details</button>
-    </div>
-
-    <!-- Tab Content -->
-    <div class="overflow-y-auto max-h-[calc(90vh-160px)]">
-
-      <!-- Preview Panel -->
-      <div id="panel-preview" class="p-6">
-        <div class="rounded-xl overflow-hidden">
-          <img id="modal-image" src="" alt="" class="w-full h-auto block" />
-        </div>
-      </div>
-
-      <!-- Details Panel -->
-      <div id="panel-details" class="hidden p-6 space-y-6">
-        <div>
-          <h4 class="font-semibold mb-2 text-base-content">Project Overview</h4>
-          <p id="detail-description" class="text-base-content/60"></p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <h4 class="font-semibold mb-1 text-base-content">Client</h4>
-            <p id="detail-client" class="text-base-content/60"></p>
-          </div>
-          <div>
-            <h4 class="font-semibold mb-1 text-base-content">Industry</h4>
-            <p id="detail-industry" class="text-base-content/60"></p>
-          </div>
-        </div>
-
-        <div>
-          <h4 class="font-semibold mb-2 text-base-content">Services Provided</h4>
-          <div id="detail-services" class="flex flex-wrap gap-2"></div>
-        </div>
-
-        <div>
-          <h4 class="font-semibold mb-2 text-base-content">Technologies Used</h4>
-          <div id="detail-technologies" class="flex flex-wrap gap-2"></div>
-        </div>
-
-        <div>
-          <h4 class="font-semibold mb-3 text-base-content">Key Results</h4>
-          <ul id="detail-results" class="space-y-2"></ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Click-outside to close -->
-  <form method="dialog" class="modal-backdrop">
-    <button>close</button>
-  </form>
-</dialog>
-
-<style>
-  /* Card lift on hover */
-  .card-inner {
-    transform: translateY(0);
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  .project-card:hover .card-inner {
-    transform: translateY(-8px);
-  }
-
-  /* Scroll-triggered fade-up */
-  .observe-fade-up {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.55s ease calc(var(--delay, 0ms)),
-                transform 0.55s ease calc(var(--delay, 0ms));
-  }
-  .observe-fade-up.in-view {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Active tab styling */
-  .tab-active {
-    color: oklch(var(--p));
-    border-bottom: 2px solid oklch(var(--p));
-  }
-
-  /* Modal entrance */
-  dialog[open] .modal-box {
-    animation: modalIn 0.25s ease both;
-  }
-  @keyframes modalIn {
-    from { opacity: 0; transform: scale(0.94) translateY(16px); }
-    to   { opacity: 1; transform: scale(1) translateY(0); }
-  }
-</style>
-
-<script define:vars={{ projects }}>
-  // ── IntersectionObserver: scroll fade-up ─────────────────────
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach((e) => {
-      if (e.isIntersecting) { e.target.classList.add('in-view'); observer.unobserve(e.target); }
-    }),
-    { threshold: 0.12 }
-  );
-  document.querySelectorAll('#projects .observe-fade-up').forEach((el) => observer.observe(el));
-
-  // ── Modal logic ───────────────────────────────────────────────
-  const modal       = document.getElementById('project-modal');
-  const modalTitle  = document.getElementById('modal-title');
-  const modalImage  = document.getElementById('modal-image');
-  const panelPreview  = document.getElementById('panel-preview');
-  const panelDetails  = document.getElementById('panel-details');
-  const tabPreview    = document.getElementById('tab-preview');
-  const tabDetails    = document.getElementById('tab-details');
-
-  // Populate modal with project data
-  const openProject = (id) => {
-    const project = projects.find((p) => p.id === id);
-    if (!project) return;
-
-    // Header
-    modalTitle.textContent = project.title;
-
-    // Image
-    modalImage.src = project.image;
-    modalImage.alt = project.title;
-
-    // Details
-    document.getElementById('detail-description').textContent = project.description;
-    document.getElementById('detail-client').textContent      = project.client;
-    document.getElementById('detail-industry').textContent    = project.industry;
-
-    const servicesEl = document.getElementById('detail-services');
-    servicesEl.innerHTML = project.services
-      .map((s) => `<span class="badge badge-soft badge-primary text-sm">${s}</span>`)
-      .join('');
-
-    const techEl = document.getElementById('detail-technologies');
-    techEl.innerHTML = project.technologies
-      .map((t) => `<span class="badge badge-soft badge-accent text-sm">${t}</span>`)
-      .join('');
-
-    const resultsEl = document.getElementById('detail-results');
-    resultsEl.innerHTML = project.results
-      .map((r) => `
-        <li class="flex items-start gap-2">
-          <span class="text-primary mt-0.5">✓</span>
-          <span class="text-base-content/60">${r}</span>
-        </li>`)
-      .join('');
-
-    // Reset to preview tab
-    switchTab('preview');
-
-    modal.showModal();
-  };
-
-  // Tab switching
-  const switchTab = (tab) => {
-    const isPreview = tab === 'preview';
-    panelPreview.classList.toggle('hidden', !isPreview);
-    panelDetails.classList.toggle('hidden', isPreview);
-    tabPreview.classList.toggle('tab-active', isPreview);
-    tabDetails.classList.toggle('tab-active', !isPreview);
-  };
-
-  tabPreview.addEventListener('click', () => switchTab('preview'));
-  tabDetails.addEventListener('click', () => switchTab('details'));
-
-  // Close button
-  document.getElementById('modal-close').addEventListener('click', () => modal.close());
-
-  // Card click listeners
-  document.querySelectorAll('.project-card').forEach((card) => {
-    card.addEventListener('click', () => {
-      const id = parseInt(card.dataset.projectId, 10);
-      openProject(id);
-    });
-  });
-</script>
