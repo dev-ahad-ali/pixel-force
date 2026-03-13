@@ -114,7 +114,7 @@ const siblings = [
             <div class="flex flex-wrap gap-3">
                 {
                     siblings
-                        .filter((s) => !s.href.endsWith(page.slug))
+                        .filter((s) => !s.href.endsWith(page.data.slug))
                         .map((s) => (
                             <a href={s.href} class="btn btn-outline btn-sm">
                                 {s.label}
