@@ -1,0 +1,134 @@
+---
+// src/pages/blog/[slug].astro
+import { render } from "astro:content";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    return posts.map((post) => ({
+        params: { slug: post.data.slug },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { data } = post;
+const { Content } = await render(post);
+
+const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+});
+---
+
+<BaseLayout>
+    <main class="max-w-4xl mx-auto px-6 py-30">
+        <!-- ── Hero ──────────────────────────────────────────── -->
+        <header class="mb-12">
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 mb-4">
+                {
+                    data.tags.map((tag) => (
+                        <span class="text-sm text-primary/70 font-medium">
+                            #{tag}
+                        </span>
+                    ))
+                }
+            </div>
+
+            <!-- Title -->
+            <h1
+                class="text-3xl sm:text-4xl lg:text-5xl font-bold text-base-content leading-tight mb-6"
+            >
+                {data.title}
+            </h1>
+
+            <!-- Excerpt -->
+            <p class="text-xl text-base-content/60 leading-relaxed mb-8">
+                {data.excerpt}
+            </p>
+
+            <!-- Author + meta row -->
+            <div class="flex items-center gap-4 py-6 border-y border-base-300">
+                <img
+                    src={data.authorImage}
+                    alt={data.author}
+                    class="w-12 h-12 rounded-full object-cover bg-base-300"
+                    onerror="this.src='https://placehold.co/48x48/1a1a1a/10b981?text=A'"
+                />
+                <div>
+                    <p class="font-semibold text-base-content">
+                        {data.author}
+                    </p>
+                    <p class="text-sm text-base-content/50">
+                        {data.authorRole}
+                    </p>
+                </div>
+                <div
+                    class="ml-auto flex items-center gap-4 text-sm text-base-content/50"
+                >
+                    <span>{formattedDate}</span>
+                    <span class="w-1 h-1 rounded-full bg-base-content/30"
+                    ></span>
+                    <span>{data.readingTime} min read</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ── Cover image ───────────────────────────────────── -->
+        <div class="rounded-2xl overflow-hidden mb-12 border border-base-300">
+            <img
+                src={data.coverImage}
+                alt={data.title}
+                class="w-full h-auto block"
+                onerror={`this.src='https://placehold.co/1200x630/1a1a1a/10b981?text=' + encodeURIComponent('${data.title}')`}
+            />
+        </div>
+
+        <!-- ── Markdown body ──────────────────────────────────── -->
+        <article
+            class="prose prose-lg max-w-none
+                       prose-headings:text-base-content
+                       prose-headings:font-bold
+                       prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
+                       prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                       prose-p:text-base-content/70
+                       prose-p:leading-relaxed
+                       prose-strong:text-base-content
+                       prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+                       prose-code:text-primary prose-code:bg-base-200 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
+                       prose-pre:bg-base-200 prose-pre:border prose-pre:border-base-300 prose-pre:rounded-xl
+                       prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-base-200 prose-blockquote:rounded-r-xl prose-blockquote:py-1 prose-blockquote:not-italic
+                       prose-blockquote:text-base-content/70
+                       prose-li:text-base-content/70
+                       prose-ul:my-4
+                       prose-ol:my-4
+                       prose-hr:border-base-300
+                       prose-img:rounded-xl prose-img:border prose-img:border-base-300"
+        >
+            <Content />
+        </article>
+
+        <!-- ── Bottom nav ────────────────────────────────────── -->
+        <div class="mt-16 pt-8 border-t border-base-300">
+            <a href="/" class="btn btn-outline btn-primary gap-2">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+                </svg>
+                Back to All Posts
+            </a>
+        </div>
+    </main>
+</BaseLayout>
