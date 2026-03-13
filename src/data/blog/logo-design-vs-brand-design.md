@@ -4,7 +4,7 @@ slug: "logo-design-vs-brand-design"
 excerpt: "A logo is a symbol. A brand is a system. Confusing the two is one of the most expensive mistakes a growing business can make. Here's what brand design actually involves and why it's worth the investment."
 author: "Amara Diallo"
 authorRole: "Creative Director"
-authorImage: "/images/team/amara.jpg"
+authorImage: "https://i.pravatar.cc/150?img=2"
 coverImage: "/images/blog/brand-vs-logo.jpg"
 category: "Logo & Brand Design"
 tags:

@@ -4,7 +4,7 @@ slug: "why-digital-marketing-agencies-fail"
 excerpt: "Most agencies are great at pitching and terrible at delivering. Here's the honest breakdown of where things go wrong — and what a results-driven agency actually looks like."
 author: "Sarah Okonkwo"
 authorRole: "Founder & Strategy Director"
-authorImage: "/images/team/sarah.jpg"
+authorImage: "https://i.pravatar.cc/150?img=4"
 coverImage: "/images/blog/agency-failure.jpg"
 category: "Digital Marketing"
 tags:

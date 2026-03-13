@@ -4,7 +4,7 @@ slug: "business-processes-to-automate-with-ai"
 excerpt: "AI automation isn't just for enterprises with six-figure tech budgets. Here are five workflows any small or mid-sized business can automate today — with tools you can set up this week."
 author: "Marcus Thiele"
 authorRole: "Head of AI & Automation"
-authorImage: "/images/team/marcus.jpg"
+authorImage: "https://i.pravatar.cc/150?img=6"
 coverImage: "/images/blog/ai-automation.jpg"
 category: "AI Automation"
 tags:

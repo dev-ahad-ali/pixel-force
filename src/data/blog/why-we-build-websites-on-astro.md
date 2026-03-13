@@ -4,7 +4,7 @@ slug: "why-we-build-websites-on-astro"
 excerpt: "We've built sites on WordPress, Webflow, Next.js, and more. Here's why Astro has become our default choice for client websites — and the specific types of projects where it wins every time."
 author: "Jordan Eze"
 authorRole: "Lead Web Developer"
-authorImage: "/images/team/jordan.jpg"
+authorImage: "https://i.pravatar.cc/150?img=3"
 coverImage: "/images/blog/astro-development.jpg"
 category: "Web Development"
 tags:
