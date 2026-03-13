@@ -1,4 +1,41 @@
 ---
+import { getCollection } from "astro:content";
+import ProjectCard from "./ProjectCard.astro";
+interface Project {
+    title: string;
+    overview: string;
+    client: string;
+    image: string;
+    category: string;
+    services: string[];
+    technologies: string[];
+    keyResults: {
+        metric: string;
+        value: string;
+        description: string;
+    }[];
+    featured: boolean;
+    publishedAt: Date;
+}
+
+const projects = await getCollection("projects");
+
+const webDevelopmentProjects = projects.filter(
+    (item) => item.data.category === "Web Development",
+);
+
+const digitalMarketingProjects = projects.filter(
+    (item) => item.data.category === "Digital Marketing",
+);
+
+const designProjects = projects.filter(
+    (item) => item.data.category === "Logo & Brand Design",
+);
+
+const aiAutomationProjects = projects.filter(
+    (item) => item.data.category === "AI Automation",
+);
+
 const categories = [
     "Web Development",
     "Digital Marketing",
@@ -45,33 +82,41 @@ const categories = [
             id={categories[0]}
             class="hidden md:grid-cols-3 gap-8 project-grid"
         >
-            <h2>dev 1</h2>
-            <h2>dev 2</h2>
-            <h2>dev 3</h2>
+            {
+                webDevelopmentProjects.map((project, idx) => (
+                    <ProjectCard data={project} index={idx} />
+                ))
+            }
         </div>
         <div
             id={categories[1]}
             class="md:grid-cols-3 gap-8 hidden project-grid"
         >
-            <h2>Marketing 1</h2>
-            <h2>Marketing 2</h2>
-            <h2>Marketing 3</h2>
+            {
+                digitalMarketingProjects.map((project, idx) => (
+                    <ProjectCard data={project} index={idx} />
+                ))
+            }
         </div>
         <div
             id={categories[2]}
             class="md:grid-cols-3 gap-8 hidden project-grid"
         >
-            <h2>Design 1</h2>
-            <h2>Design 2</h2>
-            <h2>Design 3</h2>
+            {
+                designProjects.map((project, idx) => (
+                    <ProjectCard data={project} index={idx} />
+                ))
+            }
         </div>
         <div
             id={categories[3]}
             class="md:grid-cols-3 gap-8 hidden project-grid"
         >
-            <h2>Ai 1</h2>
-            <h2>Ai 2</h2>
-            <h2>Ai 3</h2>
+            {
+                aiAutomationProjects.map((project, idx) => (
+                    <ProjectCard data={project} index={idx} />
+                ))
+            }
         </div>
     </div>
 </section>
