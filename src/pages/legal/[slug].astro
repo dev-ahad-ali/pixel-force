@@ -1,0 +1,127 @@
+---
+// src/pages/legal/[slug].astro
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+    const pages = await getCollection("legal");
+    return pages.map((page) => ({
+        params: { slug: page.data.slug },
+        props: { page },
+    }));
+}
+
+const { page } = Astro.props;
+const { data } = page;
+const { Content } = await render(page);
+
+const formattedDate = new Date(data.lastUpdated).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+});
+
+// Sibling links for cross-navigation
+const siblings = [
+    { label: "Privacy Policy", href: "/legal/privacy-policy" },
+    { label: "Terms of Service", href: "/legal/terms-of-service" },
+    { label: "Cookie Policy", href: "/legal/cookie-policy" },
+];
+---
+
+<BaseLayout>
+    <!-- ── Sticky top nav ──────────────────────────────────── -->
+    <div class="mt-30">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-3">
+            <a href="/" class="btn btn-ghost btn-sm gap-2">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+                </svg>
+                Home
+            </a>
+            <span class="text-base-content/30 hidden sm:inline">|</span>
+            <!-- Sibling page links -->
+            <nav class="hidden sm:flex items-center gap-1">
+                {
+                    siblings.map((s) => (
+                        <a
+                            href={s.href}
+                            class={`btn btn-ghost btn-xs ${s.href.endsWith(page.data.slug) ? "btn-active text-primary" : "text-base-content/50"}`}
+                        >
+                            {s.label}
+                        </a>
+                    ))
+                }
+            </nav>
+        </div>
+    </div>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 pb-24">
+        <!-- ── Page header ─────────────────────────────────── -->
+        <header class="mb-12 pb-8 border-b border-base-300">
+            <h1 class="text-4xl sm:text-5xl font-bold text-base-content mb-4">
+                {data.title}
+            </h1>
+            <p class="text-base-content/50 text-sm">
+                Last updated: {formattedDate}
+            </p>
+        </header>
+
+        <!-- ── Markdown body ───────────────────────────────── -->
+        <article
+            class="prose prose-lg max-w-none
+                               prose-headings:text-base-content
+                               prose-headings:font-bold
+                               prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-base-300
+                               prose-h3:text-lg prose-h3:mt-8 prose-h3:mb-3
+                               prose-p:text-base-content/70
+                               prose-p:leading-relaxed
+                               prose-strong:text-base-content
+                               prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+                               prose-code:text-primary prose-code:bg-base-200 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
+                               prose-pre:bg-base-200 prose-pre:border prose-pre:border-base-300 prose-pre:rounded-xl
+                               prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-base-200 prose-blockquote:rounded-r-xl prose-blockquote:py-1
+                               prose-blockquote:text-base-content/70 prose-blockquote:not-italic
+                               prose-li:text-base-content/70
+                               prose-ul:my-4 prose-ol:my-4
+                               prose-hr:border-base-300
+                               prose-table:text-sm
+                               prose-th:text-base-content prose-th:bg-base-200 prose-th:font-semibold
+                               prose-td:text-base-content/70 prose-td:border-base-300
+                               prose-thead:border-base-300 prose-tbody:border-base-300"
+        >
+            <Content />
+        </article>
+
+        <!-- ── Bottom sibling nav ──────────────────────────── -->
+        <div class="mt-16 pt-8 border-t border-base-300">
+            <p
+                class="text-sm text-base-content/40 mb-4 uppercase tracking-wider font-medium"
+            >
+                Other Legal Pages
+            </p>
+            <div class="flex flex-wrap gap-3">
+                {
+                    siblings
+                        .filter((s) => !s.href.endsWith(page.slug))
+                        .map((s) => (
+                            <a href={s.href} class="btn btn-outline btn-sm">
+                                {s.label}
+                            </a>
+                        ))
+                }
+            </div>
+        </div>
+    </main>
+</BaseLayout>
