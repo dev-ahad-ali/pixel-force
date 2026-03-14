@@ -129,6 +129,10 @@
     }
 }
 
+@utility btn {
+    @apply hover:border-transparent;
+}
+
 @utility btn-ghost {
     @apply hover:bg-[#10b98120];
 }
