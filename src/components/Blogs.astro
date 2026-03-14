@@ -1,11 +1,16 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import BlogCard from "../components/BlogCard.astro";
 import SectionHeader from "./ui/SectionHeader.astro";
 
+type BlogPost = CollectionEntry<"blog">;
+
 const posts = await getCollection("blog");
 const sorted = posts
-    .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+    .sort(
+        (a: BlogPost, b: BlogPost) =>
+            b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+    )
     .slice(0, 4);
 ---
 
@@ -19,6 +24,10 @@ const sorted = posts
     <div
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 container mx-auto"
     >
-        {sorted.map((post, i) => <BlogCard post={post} index={i} />)}
+        {
+            sorted.map((post: BlogPost, i: number) => (
+                <BlogCard post={post} index={i} />
+            ))
+        }
     </div>
 </section>
