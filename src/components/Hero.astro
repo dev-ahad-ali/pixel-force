@@ -7,7 +7,7 @@ const stats = [
 ];
 ---
 
-<section id="home" class="pt-32 pb-20 lg:pt-40 lg:pb-32 px-5 overflow-x-clip">
+<section id="home" class="pt-32 pb-20 lg:pt-40 lg:pb-12 px-5 overflow-x-clip">
     <div class="container mx-auto">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <!-- ── Left Content ──────────────────────────────────── -->
@@ -162,7 +162,7 @@ const stats = [
 
         <!-- Stats -->
         <div
-            class="mt-16 pt-16 border-t border-base-300 observe-fade-up"
+            class="mt-16 pt-8 border-t border-neutral/20 observe-fade-up"
             style="--delay: 400ms"
         >
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -183,6 +183,11 @@ const stats = [
                 }
             </div>
         </div>
+        <p
+            class="text-center text-primary mt-12 cursor-pointer hover:underline business-grow"
+        >
+            Let's Grow Your Business {"->"}
+        </p>
     </div>
 </section>
 
@@ -273,6 +278,9 @@ const stats = [
             .querySelector(selector)
             ?.scrollIntoView({ behavior: "smooth" });
 
+    document
+        .querySelector(".business-grow")
+        ?.addEventListener("click", () => scrollTo("#contact"));
     document
         .getElementById("cta-get-started")
         ?.addEventListener("click", () => scrollTo("#contact"));
