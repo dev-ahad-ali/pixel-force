@@ -1,53 +1,50 @@
 ---
 // src/pages/blog/[slug].astro
-import { render } from "astro:content";
+import { render, type CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogCard from "../../components/BlogCard.astro";
 
-interface Post{
-    title: string;
-       slug: string;
-       excerpt: string;
-       author: string;
-       authorRole: string;
-       authorImage: string;
-       coverImage: string;
-       category: string;
-       tags: string[];
-       readingTime: number
-       publishedAt: Date;
-       featured: boolean;
+// ── Type derived directly from the blog collection ────────────────────────────
+type BlogPost = CollectionEntry<"blog">;
+
+interface Props {
+    post: BlogPost;
+    allPosts: BlogPost[];
+    prevPost: BlogPost | null;
+    nextPost: BlogPost | null;
 }
+// ─────────────────────────────────────────────────────────────────────────────
 
 export async function getStaticPaths() {
     const allPosts = await getCollection("blog");
     const sorted = allPosts.sort(
-        (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+        (a: BlogPost, b: BlogPost) =>
+            b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
     );
 
-    return sorted.map((post, index) => ({
+    return sorted.map((post: BlogPost, index: number) => ({
         params: { slug: post.data.slug },
         props: {
             post,
             allPosts: sorted,
             prevPost: index < sorted.length - 1 ? sorted[index + 1] : null,
             nextPost: index > 0 ? sorted[index - 1] : null,
-        },
+        } satisfies Props,
     }));
 }
 
-const { post, allPosts, prevPost, nextPost } =  Astro.props;
+const { post, allPosts, prevPost, nextPost }: Props = Astro.props;
 
-const categoryPosts = allPosts
-    ?.filter(
-        (item) =>
+const categoryPosts: BlogPost[] = allPosts
+    .filter(
+        (item: BlogPost) =>
             item.data.category === post.data.category &&
             item.data.slug !== post.data.slug,
     )
     .slice(0, 4);
 
-const { data }:{data:Post} = post;
+const { data } = post;
 const { Content } = await render(post);
 
 const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
@@ -55,6 +52,14 @@ const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
 });
+
+// Helper so prev/next date formatting is DRY
+const shortDate = (d: Date): string =>
+    new Date(d).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+    });
 ---
 
 <BaseLayout>
@@ -66,7 +71,7 @@ const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
                 <!-- Tags -->
                 <div class="flex flex-wrap gap-2 mb-4">
                     {
-                        data.tags.map((tag) => (
+                        data.tags.map((tag: string) => (
                             <span class="text-sm text-primary/70 font-medium">
                                 #{tag}
                             </span>
@@ -187,18 +192,17 @@ const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
                             {prevPost.data.title}
                         </span>
                         <span class="text-xs text-base-content/40 mt-auto">
-                            {new Date(prevPost.data.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                            {shortDate(prevPost.data.publishedAt)}
                         </span>
                     </a>
                 ) : (
-                    <!-- Empty placeholder to keep Next aligned right when no Prev -->
                     <div />
                 )
             }
 
             <!-- Next post (newer) -->
             {
-                nextPost && (
+                nextPost ? (
                     <a
                         href={`/blog/${nextPost.data.slug}`}
                         class="group flex flex-col gap-2 rounded-2xl border border-base-300 hover:border-primary/50 bg-base-100 hover:bg-base-200/50 p-5 transition-all duration-300 sm:text-right sm:items-end"
@@ -224,9 +228,11 @@ const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
                             {nextPost.data.title}
                         </span>
                         <span class="text-xs text-base-content/40 mt-auto">
-                            {new Date(nextPost.data.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                            {shortDate(nextPost.data.publishedAt)}
                         </span>
                     </a>
+                ) : (
+                    <div />
                 )
             }
         </nav>
@@ -261,7 +267,11 @@ const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
         <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 container mx-auto mt-8"
         >
-            {categoryPosts?.map((post, i) => <BlogCard post={post} index={i} />)}
+            {
+                categoryPosts.map((relatedPost: BlogPost, i: number) => (
+                    <BlogCard post={relatedPost} index={i} />
+                ))
+            }
         </div>
     </section>
 </BaseLayout>
