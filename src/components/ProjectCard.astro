@@ -12,6 +12,7 @@ interface Project {
     overview: string;
     client: string;
     image: string;
+    thumbnail: string;
     category: string;
     services: string[];
     technologies: string[];
@@ -49,7 +50,7 @@ const projectJson = JSON.stringify(project);
     >
         <figure class="relative aspect-4/3 overflow-hidden">
             <img
-                src={project.image}
+                src={project.thumbnail}
                 alt={project.title}
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 rounded-t-2xl"
                 loading="lazy"

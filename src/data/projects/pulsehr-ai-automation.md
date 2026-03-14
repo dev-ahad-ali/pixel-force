@@ -3,6 +3,7 @@ title: "PulseHR — AI-Powered Recruitment Automation"
 overview: "An end-to-end AI automation pipeline that reduced a recruitment agency's candidate screening time by 80% and enabled them to handle 3x the volume with the same team."
 client: "PulseHR Recruitment"
 image: "/images/projects/pulsehr-automation.jpg"
+thumbnail: "/images/projects-thumbnail/pulsehr-automation.jpg"
 category: "AI Automation"
 services:
   - "AI Workflow Automation"

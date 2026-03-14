@@ -3,6 +3,7 @@ title: "Evergreen Law — SEO & Content Authority Campaign"
 overview: "A 12-month SEO and content strategy that took a boutique law firm from page 4 to the #1 position for 14 high-intent local keywords and generated a consistent flow of qualified leads."
 client: "Evergreen Law Group"
 image: "/images/projects/evergreen-law-seo.jpg"
+thumbnail: "/images/projects-thumbnail/evergreen-law-seo.jpg"
 category: "Digital Marketing"
 services:
   - "SEO Strategy & Execution"

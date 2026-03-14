@@ -3,6 +3,7 @@ title: "ArchForm Studio — AI Content & Proposal Automation"
 overview: "An AI-powered internal automation suite for an architecture firm that cut proposal creation time from 12 hours to 90 minutes and automated project report generation, saving 20+ hours per week."
 client: "ArchForm Studio"
 image: "/images/projects/archform-automation.jpg"
+thumbnail: "/images/projects-thumbnail/archform-automation.jpg"
 category: "AI Automation"
 services:
   - "AI Workflow Design"

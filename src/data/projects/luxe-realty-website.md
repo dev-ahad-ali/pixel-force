@@ -3,6 +3,7 @@ title: "Luxe Realty — Real Estate Platform"
 overview: "A high-performance real estate website with property listings, virtual tours, and lead capture systems that tripled inbound inquiries within 60 days of launch."
 client: "Luxe Realty Group"
 image: "/images/projects/luxe-realty.jpg"
+thumbnail: "/images/projects-thumbnail/luxe-realty.jpg"
 category: "Web Development"
 services:
   - "Website Design & Development"

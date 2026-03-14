@@ -3,6 +3,7 @@ title: "Solace Wellness — Social Media Growth & Brand Authority"
 overview: "A strategic social media transformation for a wellness brand that grew their Instagram from 2,400 to 47,000 followers in 9 months and converted social reach into $180,000 in attributable revenue."
 client: "Solace Wellness Co."
 image: "/images/projects/solace-wellness-social.jpg"
+thumbnail: "/images/projects-thumbnail/solace-wellness-social.jpg"
 category: "Digital Marketing"
 services:
   - "Social Media Strategy"

@@ -3,6 +3,7 @@ title: "Stride Fitness — Membership Web App"
 overview: "A custom membership and class booking web application for a boutique fitness studio, replacing a costly third-party platform and reducing software costs by $1,800/month."
 client: "Stride Fitness Studio"
 image: "/images/projects/stride-fitness-app.jpg"
+thumbnail: "/images/projects-thumbnail/stride-fitness-app.jpg"
 category: "Web Development"
 services:
   - "Web Application Development"

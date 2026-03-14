@@ -3,6 +3,7 @@ title: "TerraFlow — AI Customer Support Automation"
 overview: "An AI-powered customer support system for a SaaS company that deflected 72% of support tickets automatically, reducing support costs by $8,400/month while improving customer satisfaction scores."
 client: "TerraFlow SaaS"
 image: "/images/projects/terraflow-ai-support.jpg"
+thumbnail: "/images/projects-thumbnail/terraflow-ai-support.jpg"
 category: "AI Automation"
 services:
   - "AI Chatbot Development"

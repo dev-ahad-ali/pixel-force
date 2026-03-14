@@ -3,6 +3,7 @@ title: "Bloom & Co — E-Commerce Skincare Store"
 overview: "A beautifully crafted e-commerce storefront for an indie skincare brand, complete with subscription model, quiz-based product matching, and a 38% increase in average order value."
 client: "Bloom & Co Skincare"
 image: "/images/projects/bloom-co.jpg"
+thumbnail: "/images/projects-thumbnail/bloom-co.jpg"
 category: "Web Development"
 services:
   - "E-Commerce Development"

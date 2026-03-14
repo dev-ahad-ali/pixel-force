@@ -3,6 +3,7 @@ title: "Vela Coffee Roasters — Brand Identity & Packaging"
 overview: "A warm, story-driven brand identity for an artisan coffee roaster, including logo, packaging design, and brand guidelines that helped them secure placement in 35 retail stores within 6 months."
 client: "Vela Coffee Roasters"
 image: "/images/projects/vela-coffee-brand.jpg"
+thumbnail: "/images/projects-thumbnail/vela-coffee-brand.jpg"
 category: "Logo & Brand Design"
 services:
   - "Logo Design"

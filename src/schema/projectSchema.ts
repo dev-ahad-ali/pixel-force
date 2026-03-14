@@ -5,6 +5,7 @@ export const projectSchema = z.object({
     overview: z.string(),
     client: z.string(),
     image: z.string(),
+    thumbnail: z.string(),
     category: z.string(),
     services: z.array(z.string()),
     technologies: z.array(z.string()),

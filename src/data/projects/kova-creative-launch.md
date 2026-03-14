@@ -3,6 +3,7 @@ title: "Kova Creative — Full Brand & Website Launch"
 overview: "End-to-end brand identity and website for a newly launched creative consultancy — from naming and logo through to a polished Webflow site — completed in 4 weeks for a compelling market debut."
 client: "Kova Creative"
 image: "/images/projects/kova-creative-launch.jpg"
+thumbnail: "/images/projects-thumbnail/kova-creative-launch.jpg"
 category: "Logo & Brand Design"
 services:
   - "Brand Strategy & Naming"

@@ -3,6 +3,7 @@ title: "Meridian Finance — Brand Identity System"
 overview: "A complete brand identity for a fintech startup, from logo and typography to a full design system used across web, mobile, and investor materials."
 client: "Meridian Finance"
 image: "/images/projects/meridian-brand.jpg"
+thumbnail: "/images/projects-thumbnail/meridian-brand.jpg"
 category: "Logo & Brand Design"
 services:
   - "Logo Design"

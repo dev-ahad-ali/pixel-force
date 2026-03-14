@@ -3,6 +3,7 @@ title: "NovaBite — Restaurant Chain Growth Campaign"
 overview: "A full-funnel digital marketing campaign for a regional restaurant chain that drove a 189% increase in online orders and expanded their loyalty program to 40,000+ members."
 client: "NovaBite Restaurants"
 image: "/images/projects/novabite-marketing.jpg"
+thumbnail: "/images/projects-thumbnail/novabite-marketing.jpg"
 category: "Digital Marketing"
 services:
   - "Paid Social Advertising"
