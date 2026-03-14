@@ -17,7 +17,10 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const categoryPosts = posts
     .filter((item) => item.data.category === post.data.category)
-    .slice(0, 4);
+    .slice(0, 4)
+    .sort(
+        (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+    );
 const { data } = post;
 const { Content } = await render(post);
 
