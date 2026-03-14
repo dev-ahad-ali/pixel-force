@@ -236,14 +236,34 @@ const navLinks = [
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll(); // run once on load
 
-    // ── Smooth scroll for all nav-link buttons ────────────────────
+    // // ── Smooth scroll for all nav-link buttons ────────────────────
     document.querySelectorAll<HTMLButtonElement>(".nav-link").forEach((btn) => {
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", (e) => {
             const href = btn.dataset.href;
             if (!href) return;
-            const target = document.querySelector(href);
-            target?.scrollIntoView({ behavior: "smooth" });
+
+            const isHomePage = window.location.pathname === "/";
+
+            if (isHomePage) {
+                const target = document.querySelector(href);
+                target?.scrollIntoView({ behavior: "smooth" });
+            } else {
+                sessionStorage.setItem("scrollToSection", href);
+                window.location.href = "/";
+            }
         });
+    });
+
+    // Scroll to section after navigation to home
+    window.addEventListener("load", () => {
+        const sectionToScroll = sessionStorage.getItem("scrollToSection");
+        if (sectionToScroll) {
+            sessionStorage.removeItem("scrollToSection");
+            setTimeout(() => {
+                const target = document.querySelector(sectionToScroll);
+                target?.scrollIntoView({ behavior: "smooth" });
+            }, 100);
+        }
     });
 
     // ── Theme toggle ──────────────────────────────────────────────
