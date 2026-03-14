@@ -1,41 +1,27 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
 import ProjectModal from "../components/ui/ProjectModal.astro";
 import SectionHeader from "./ui/SectionHeader.astro";
-interface Project {
-    title: string;
-    overview: string;
-    client: string;
-    image: string;
-    category: string;
-    services: string[];
-    technologies: string[];
-    keyResults: {
-        metric: string;
-        value: string;
-        description: string;
-    }[];
-    featured: boolean;
-    publishedAt: Date;
-}
+
+type Project = CollectionEntry<"projects">;
 
 const projects = await getCollection("projects");
 
 const webDevelopmentProjects = projects.filter(
-    (item) => item.data.category === "Web Development",
+    (item: Project) => item.data.category === "Web Development",
 );
 
 const digitalMarketingProjects = projects.filter(
-    (item) => item.data.category === "Digital Marketing",
+    (item: Project) => item.data.category === "Digital Marketing",
 );
 
 const designProjects = projects.filter(
-    (item) => item.data.category === "Logo & Brand Design",
+    (item: Project) => item.data.category === "Logo & Brand Design",
 );
 
 const aiAutomationProjects = projects.filter(
-    (item) => item.data.category === "AI Automation",
+    (item: Project) => item.data.category === "AI Automation",
 );
 
 const categories = [
@@ -60,7 +46,7 @@ const categories = [
             {
                 categories.map((item, idx) => (
                     <button
-                        class={`project-tab-btn btn join-item ${idx === 0 ? "btn-primary project-tab-active" : ""}`}
+                        class={`project-tab-btn btn join-item hover:bg-primary/20 ${idx === 0 ? "btn-primary project-tab-active" : ""}`}
                         data-category={item}
                     >
                         {item}
@@ -75,7 +61,7 @@ const categories = [
             class="hidden md:grid-cols-3 gap-8 project-grid"
         >
             {
-                webDevelopmentProjects.map((project, idx) => (
+                webDevelopmentProjects.map((project: Project, idx: number) => (
                     <ProjectCard data={project} index={idx} />
                 ))
             }
@@ -85,9 +71,11 @@ const categories = [
             class="md:grid-cols-3 gap-8 hidden project-grid"
         >
             {
-                digitalMarketingProjects.map((project, idx) => (
-                    <ProjectCard data={project} index={idx} />
-                ))
+                digitalMarketingProjects.map(
+                    (project: Project, idx: number) => (
+                        <ProjectCard data={project} index={idx} />
+                    ),
+                )
             }
         </div>
         <div
@@ -95,7 +83,7 @@ const categories = [
             class="md:grid-cols-3 gap-8 hidden project-grid"
         >
             {
-                designProjects.map((project, idx) => (
+                designProjects.map((project: Project, idx: number) => (
                     <ProjectCard data={project} index={idx} />
                 ))
             }
@@ -105,7 +93,7 @@ const categories = [
             class="md:grid-cols-3 gap-8 hidden project-grid"
         >
             {
-                aiAutomationProjects.map((project, idx) => (
+                aiAutomationProjects.map((project: Project, idx: number) => (
                     <ProjectCard data={project} index={idx} />
                 ))
             }

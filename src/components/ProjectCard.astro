@@ -31,7 +31,7 @@ const projectJson = JSON.stringify(project);
 ---
 
 <div
-    class="observe-fade-up group cursor-pointer project-card"
+    class="observe-fade-up group cursor-pointer project-card px-0.5"
     style={`--delay: ${index * 100}ms`}
     data-project={projectJson}
 >
@@ -51,7 +51,7 @@ const projectJson = JSON.stringify(project);
             <img
                 src={project.image}
                 alt={project.title}
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 rounded-t-2xl"
                 loading="lazy"
                 onerror={`this.src='https://placehold.co/800x600/1a1a1a/10b981?text=' + encodeURIComponent('${project.title}')`}
             />
