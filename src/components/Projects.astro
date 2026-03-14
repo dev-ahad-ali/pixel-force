@@ -46,7 +46,7 @@ const categories = [
             {
                 categories.map((item, idx) => (
                     <button
-                        class={`project-tab-btn btn join-item hover:bg-primary/20 ${idx === 0 ? "btn-primary project-tab-active" : ""}`}
+                        class={`project-tab-btn btn join-item ${idx === 0 ? "btn-primary project-tab-active" : ""}`}
                         data-category={item}
                     >
                         {item}
@@ -117,6 +117,21 @@ const categories = [
         });
     }
 
+    function checkHoverBg() {
+        btns.forEach((b) => {
+            if (
+                b.classList.contains("btn-primary") &&
+                b.classList.contains("project-tab-active")
+            ) {
+                b.classList.remove("hover:bg-primary/20");
+            } else {
+                b.classList.add("hover:bg-primary/20");
+            }
+        });
+    }
+
+    checkHoverBg();
+
     document.querySelector(".tab-btns")?.addEventListener("click", (e) => {
         const btn = (e.target as HTMLElement)?.closest(
             ".project-tab-btn",
@@ -124,12 +139,14 @@ const categories = [
 
         if (!btn) return;
 
-        btns.forEach((b) =>
-            b.classList.remove("btn-primary", "project-tab-active"),
-        );
+        btns.forEach((b) => {
+            b.classList.remove("btn-primary", "project-tab-active");
+        });
         btn.classList.add("btn-primary", "project-tab-active");
 
         showTabContent(btn.dataset.category || "");
+
+        checkHoverBg();
     });
 
     showTabContent(btns[0]?.dataset.category || "");
