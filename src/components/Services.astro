@@ -1,143 +1,140 @@
 ---
 import {
-  Megaphone,
-  Code,
-  Palette,
-  Cpu,
-  Search,
-  TrendingUp,
-} from '@lucide/astro';
+    Megaphone,
+    Code,
+    Palette,
+    Cpu,
+    Search,
+    TrendingUp,
+} from "@lucide/astro";
+import SectionHeader from "./ui/SectionHeader.astro";
 
 const services = [
-  {
-    icon: Megaphone,
-    title: 'Digital Marketing',
-    description:
-      'Drive growth with data-driven marketing strategies across all digital channels.',
-  },
-  {
-    icon: Code,
-    title: 'Website Development',
-    description:
-      'Build fast, responsive, and beautiful websites that convert visitors into customers.',
-  },
-  {
-    icon: Palette,
-    title: 'Logo & Brand Design',
-    description:
-      'Create memorable brand identities that resonate with your target audience.',
-  },
-  {
-    icon: Cpu,
-    title: 'AI Automation',
-    description:
-      'Streamline operations and boost efficiency with intelligent automation solutions.',
-  },
-  {
-    icon: Search,
-    title: 'SEO Optimization',
-    description:
-      'Rank higher on search engines and attract more organic traffic to your site.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Conversion Optimization',
-    description:
-      'Maximize ROI by optimizing every step of your customer journey.',
-  },
+    {
+        icon: Megaphone,
+        title: "Digital Marketing",
+        description:
+            "Drive growth with data-driven marketing strategies across all digital channels.",
+    },
+    {
+        icon: Code,
+        title: "Website Development",
+        description:
+            "Build fast, responsive, and beautiful websites that convert visitors into customers.",
+    },
+    {
+        icon: Palette,
+        title: "Logo & Brand Design",
+        description:
+            "Create memorable brand identities that resonate with your target audience.",
+    },
+    {
+        icon: Cpu,
+        title: "AI Automation",
+        description:
+            "Streamline operations and boost efficiency with intelligent automation solutions.",
+    },
+    {
+        icon: Search,
+        title: "SEO Optimization",
+        description:
+            "Rank higher on search engines and attract more organic traffic to your site.",
+    },
+    {
+        icon: TrendingUp,
+        title: "Conversion Optimization",
+        description:
+            "Maximize ROI by optimizing every step of your customer journey.",
+    },
 ];
 ---
 
 <section id="services" class="py-20 lg:py-32 px-5 bg-base-200/50">
-  <div class="container mx-auto">
+    <div class="container mx-auto">
+        <SectionHeader
+            label="Our Services"
+            title="Comprehensive Digital Solutions"
+            description="Everything you need to build, grow, and scale your digital presence"
+        />
 
-    <!-- Section Header -->
-    <div class="text-center max-w-3xl mx-auto mb-16 observe-fade-up">
-      <span class="badge badge-soft badge-primary text-sm font-medium px-4 py-3 rounded-full mb-4">
-        Our Services
-      </span>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-6 text-base-content">
-        Comprehensive Digital Solutions
-      </h2>
-      <p class="text-lg text-base-content/60">
-        Everything you need to build, grow, and scale your digital presence
-      </p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {
+                services.map((service, index) => {
+                    const Icon = service.icon;
+                    return (
+                        <div
+                            class="observe-fade-up group"
+                            style={`--delay: ${index * 100}ms`}
+                        >
+                            <div class="service-card h-full bg-base-100 border border-neutral/20 rounded-2xl p-8 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 cursor-default">
+                                <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 transition-colors duration-300 group-hover:bg-primary/20">
+                                    <Icon class="w-7 h-7 text-primary" />
+                                </div>
+
+                                <h3 class="text-xl font-semibold mb-3 text-base-content">
+                                    {service.title}
+                                </h3>
+                                <p class="text-base-content/60 leading-relaxed">
+                                    {service.description}
+                                </p>
+
+                                <div class="mt-6 text-primary font-medium flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    Learn more
+                                    <span class="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                                        →
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })
+            }
+        </div>
     </div>
-
-    <!-- Services Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {services.map((service, index) => {
-      const Icon = service.icon;
-     return (
-     <div
-       class="observe-fade-up group"
-       style={`--delay: ${index * 100}ms`}
-     >
-       <div class="service-card h-full bg-base-100 border border-neutral/20 rounded-2xl p-8 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 cursor-default">
-
-         <!-- Icon -->
-         <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 transition-colors duration-300 group-hover:bg-primary/20">
-             <Icon class="w-7 h-7 text-primary" />
-         </div>
-
-         <!-- Content -->
-         <h3 class="text-xl font-semibold mb-3 text-base-content">{service.title}</h3>
-         <p class="text-base-content/60 leading-relaxed">{service.description}</p>
-
-         <!-- Hover arrow -->
-         <div class="mt-6 text-primary font-medium flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-           Learn more
-           <span class="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-         </div>
-
-       </div>
-     </div>
-     )
-      })}
-    </div>
-
-  </div>
 </section>
 
 <style>
-  /* Card lift on hover */
-  .service-card {
-    transform: translateY(0);
-    transition: transform 0.3s ease, border-color 0.3s ease,
-                box-shadow 0.3s ease;
-  }
-  .group:hover .service-card {
-    transform: translateY(-8px);
-  }
+    /* Card lift on hover */
+    .service-card {
+        transform: translateY(0);
+        transition:
+            transform 0.3s ease,
+            border-color 0.3s ease,
+            box-shadow 0.3s ease;
+    }
+    .group:hover .service-card {
+        transform: translateY(-8px);
+    }
 
-  /* Scroll-triggered fade-up */
-  .observe-fade-up {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.55s ease calc(var(--delay, 0ms)),
-                transform 0.55s ease calc(var(--delay, 0ms));
-  }
-  .observe-fade-up.in-view {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    /* Scroll-triggered fade-up */
+    .observe-fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+            opacity 0.55s ease calc(var(--delay, 0ms)),
+            transform 0.55s ease calc(var(--delay, 0ms));
+    }
+    .observe-fade-up.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
 </style>
 
 <script>
-  // IntersectionObserver — replaces whileInView from motion/react
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target); // fire once
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
+    // IntersectionObserver — replaces whileInView from motion/react
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("in-view");
+                    observer.unobserve(entry.target); // fire once
+                }
+            });
+        },
+        { threshold: 0.15 },
+    );
 
-  document
-    .querySelectorAll('#services .observe-fade-up')
-    .forEach((el) => observer.observe(el));
+    document
+        .querySelectorAll("#services .observe-fade-up")
+        .forEach((el) => observer.observe(el));
 </script>

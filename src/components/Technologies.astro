@@ -1,4 +1,6 @@
 ---
+import SectionHeader from "./ui/SectionHeader.astro";
+
 const technologies = [
     { name: "React", logo: "/icons/react.svg" },
     { name: "Next.js", logo: "/icons/next.svg" },
@@ -23,23 +25,11 @@ const technologies = [
 
 <section id="technologies" class="py-20 lg:py-32 px-5 bg-base-200/50">
     <div class="container mx-auto">
-        <!-- Section Header -->
-        <div class="text-center max-w-3xl mx-auto mb-16 observe-fade-up">
-            <span
-                class="badge badge-soft badge-primary text-sm font-medium px-4 py-3 rounded-full mb-4"
-            >
-                Tech Stack
-            </span>
-            <h2
-                class="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-6 text-base-content"
-            >
-                Technologies We Use
-            </h2>
-            <p class="text-lg text-base-content/60">
-                Leveraging the latest and most powerful tools to build
-                exceptional solutions
-            </p>
-        </div>
+        <SectionHeader
+            label="Tech Stack"
+            title="Technologies We Use"
+            description="Leveraging the latest and most powerful tools to build exceptional solutions"
+        />
 
         <!-- Technologies Grid -->
         <div
