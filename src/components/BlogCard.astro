@@ -31,7 +31,7 @@ const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
 
 <a
     href={`/blog/${data.slug}`}
-    class="observe-fade-up group cursor-pointer block"
+    class="observe-fade-up group cursor-pointer block px-0.5"
     style={`--delay: ${index * 100}ms`}
 >
     <div
@@ -42,7 +42,7 @@ const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
             <img
                 src={data.coverImage}
                 alt={data.title}
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 rounded-t-2xl"
                 loading="lazy"
                 onerror={`this.src='https://placehold.co/800x450/1a1a1a/10b981?text=' + encodeURIComponent('${data.title}')`}
             />
