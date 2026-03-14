@@ -24,68 +24,79 @@ const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
 ---
 
 <BaseLayout>
-    <main class="max-w-4xl mx-auto px-5 py-30">
-        <!-- ── Hero ──────────────────────────────────────────── -->
-        <header class="mb-12">
-            <!-- Tags -->
-            <div class="flex flex-wrap gap-2 mb-4">
-                {
-                    data.tags.map((tag) => (
-                        <span class="text-sm text-primary/70 font-medium">
-                            #{tag}
-                        </span>
-                    ))
-                }
-            </div>
-
-            <!-- Title -->
-            <h1
-                class="text-3xl sm:text-4xl lg:text-5xl font-bold text-base-content leading-tight mb-6"
-            >
-                {data.title}
-            </h1>
-
-            <!-- Excerpt -->
-            <p class="text-xl text-base-content/60 leading-relaxed mb-8">
-                {data.excerpt}
-            </p>
-
-            <!-- Author + meta row -->
-            <div class="flex items-center gap-4 py-6 border-y border-base-300">
-                <img
-                    src={data.authorImage}
-                    alt={data.author}
-                    class="w-12 h-12 rounded-full object-cover bg-base-300"
-                    onerror="this.src='https://placehold.co/48x48/1a1a1a/10b981?text=A'"
-                />
-                <div>
-                    <p class="font-semibold text-base-content">
-                        {data.author}
-                    </p>
-                    <p class="text-sm text-base-content/50">
-                        {data.authorRole}
-                    </p>
+    <section class="px-5">
+        <div
+            class="grid lg:grid-cols-2 gap-6 items-center container mx-auto pt-30"
+        >
+            <header class="mb-12 order-2 lg:order-1">
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-2 mb-4">
+                    {
+                        data.tags.map((tag) => (
+                            <span class="text-sm text-primary/70 font-medium">
+                                #{tag}
+                            </span>
+                        ))
+                    }
                 </div>
-                <div
-                    class="ml-auto flex items-center gap-4 text-sm text-base-content/50"
+
+                <!-- Title -->
+                <h1
+                    class="text-3xl sm:text-4xl lg:text-5xl font-bold text-base-content leading-tight mb-6"
                 >
-                    <span>{formattedDate}</span>
-                    <span class="w-1 h-1 rounded-full bg-base-content/30"
-                    ></span>
-                    <span>{data.readingTime} min read</span>
-                </div>
-            </div>
-        </header>
+                    {data.title}
+                </h1>
 
-        <!-- ── Cover image ───────────────────────────────────── -->
-        <div class="rounded-2xl overflow-hidden mb-12 border border-base-300">
-            <img
-                src={data.coverImage}
-                alt={data.title}
-                class="w-full h-auto block"
-                onerror={`this.src='https://placehold.co/1200x630/1a1a1a/10b981?text=' + encodeURIComponent('${data.title}')`}
-            />
+                <!-- Excerpt -->
+                <p class="text-xl text-base-content/60 leading-relaxed mb-8">
+                    {data.excerpt}
+                </p>
+
+                <!-- Author + meta row -->
+                <div
+                    class="flex items-center gap-4 py-6 border-y border-base-300"
+                >
+                    <img
+                        src={data.authorImage}
+                        alt={data.author}
+                        class="w-12 h-12 rounded-full object-cover bg-base-300"
+                        onerror="this.src='https://placehold.co/48x48/1a1a1a/10b981?text=A'"
+                    />
+                    <div>
+                        <p class="font-semibold text-base-content">
+                            {data.author}
+                        </p>
+                        <p class="text-sm text-base-content/50">
+                            {data.authorRole}
+                        </p>
+                    </div>
+                    <div
+                        class="ml-auto flex items-center gap-4 text-sm text-base-content/50"
+                    >
+                        <span>{formattedDate}</span>
+                        <span class="w-1 h-1 rounded-full bg-base-content/30"
+                        ></span>
+                        <span>{data.readingTime} min read</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ── Cover image ───────────────────────────────────── -->
+            <div
+                class="rounded-2xl overflow-hidden mb-12 border border-base-300 order-1 lg:order-2"
+            >
+                <img
+                    src={data.coverImage}
+                    alt={data.title}
+                    class="w-full h-auto block"
+                    onerror={`this.src='https://placehold.co/1200x630/1a1a1a/10b981?text=' + encodeURIComponent('${data.title}')`}
+                />
+            </div>
         </div>
+    </section>
+
+    <main class="max-w-4xl mx-auto px-5 py-10">
+        <!-- ── Hero ──────────────────────────────────────────── -->
 
         <!-- ── Markdown body ──────────────────────────────────── -->
         <article
