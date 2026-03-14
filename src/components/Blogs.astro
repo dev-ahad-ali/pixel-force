@@ -4,9 +4,9 @@ import BlogCard from "../components/BlogCard.astro";
 import SectionHeader from "./ui/SectionHeader.astro";
 
 const posts = await getCollection("blog");
-const sorted = posts.sort(
-    (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
-);
+const sorted = posts
+    .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+    .slice(0, 4);
 ---
 
 <section id="blogs" class="py-20 lg:py-32 px-5 bg-base-200/50">
