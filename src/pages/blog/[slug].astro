@@ -5,23 +5,49 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogCard from "../../components/BlogCard.astro";
 
-const posts = await getCollection("blog");
+interface Post{
+    title: string;
+       slug: string;
+       excerpt: string;
+       author: string;
+       authorRole: string;
+       authorImage: string;
+       coverImage: string;
+       category: string;
+       tags: string[];
+       readingTime: number
+       publishedAt: Date;
+       featured: boolean;
+}
 
 export async function getStaticPaths() {
-    return posts.map((post) => ({
+    const allPosts = await getCollection("blog");
+    const sorted = allPosts.sort(
+        (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+    );
+
+    return sorted.map((post, index) => ({
         params: { slug: post.data.slug },
-        props: { post },
+        props: {
+            post,
+            allPosts: sorted,
+            prevPost: index < sorted.length - 1 ? sorted[index + 1] : null,
+            nextPost: index > 0 ? sorted[index - 1] : null,
+        },
     }));
 }
 
-const { post } = Astro.props;
-const categoryPosts = posts
-    .filter((item) => item.data.category === post.data.category)
-    .slice(0, 4)
-    .sort(
-        (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
-    );
-const { data } = post;
+const { post, allPosts, prevPost, nextPost } =  Astro.props;
+
+const categoryPosts = allPosts
+    ?.filter(
+        (item) =>
+            item.data.category === post.data.category &&
+            item.data.slug !== post.data.slug,
+    )
+    .slice(0, 4);
+
+const { data }:{data:Post} = post;
 const { Content } = await render(post);
 
 const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
@@ -89,7 +115,7 @@ const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
                 </div>
             </header>
 
-            <!-- ── Cover image ───────────────────────────────────── -->
+            <!-- Cover image -->
             <div
                 class="rounded-2xl overflow-hidden mb-12 border border-base-300 order-1 lg:order-2"
             >
@@ -104,9 +130,7 @@ const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
     </section>
 
     <main class="max-w-4xl mx-auto px-5 py-10">
-        <!-- ── Hero ──────────────────────────────────────────── -->
-
-        <!-- ── Markdown body ──────────────────────────────────── -->
+        <!-- Markdown body -->
         <article
             class="prose prose-lg max-w-none
                        prose-headings:text-base-content
@@ -130,9 +154,86 @@ const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
             <Content />
         </article>
 
-        <!-- ── Bottom nav ────────────────────────────────────── -->
-        <div class="mt-16 pt-8 border-t border-base-300">
-            <a href="/" class="btn btn-outline btn-primary gap-2">
+        <!-- ── Prev / Next navigation ─────────────────────────── -->
+        <nav
+            class="mt-16 pt-8 border-t border-base-300 grid grid-cols-1 sm:grid-cols-2 gap-4"
+            aria-label="Post navigation"
+        >
+            <!-- Previous post (older) -->
+            {
+                prevPost ? (
+                    <a
+                        href={`/blog/${prevPost.data.slug}`}
+                        class="group flex flex-col gap-2 rounded-2xl border border-base-300 hover:border-primary/50 bg-base-100 hover:bg-base-200/50 p-5 transition-all duration-300"
+                    >
+                        <span class="flex items-center gap-2 text-xs font-medium text-base-content/40 uppercase tracking-wider group-hover:text-primary transition-colors duration-200">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-3.5 h-3.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2.5"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M15 19l-7-7 7-7"
+                                />
+                            </svg>
+                            Previous Post
+                        </span>
+                        <span class="text-sm font-semibold text-base-content group-hover:text-primary transition-colors duration-200 line-clamp-2 leading-snug">
+                            {prevPost.data.title}
+                        </span>
+                        <span class="text-xs text-base-content/40 mt-auto">
+                            {new Date(prevPost.data.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                        </span>
+                    </a>
+                ) : (
+                    <!-- Empty placeholder to keep Next aligned right when no Prev -->
+                    <div />
+                )
+            }
+
+            <!-- Next post (newer) -->
+            {
+                nextPost && (
+                    <a
+                        href={`/blog/${nextPost.data.slug}`}
+                        class="group flex flex-col gap-2 rounded-2xl border border-base-300 hover:border-primary/50 bg-base-100 hover:bg-base-200/50 p-5 transition-all duration-300 sm:text-right sm:items-end"
+                    >
+                        <span class="flex items-center gap-2 text-xs font-medium text-base-content/40 uppercase tracking-wider group-hover:text-primary transition-colors duration-200 sm:flex-row-reverse">
+                            Next Post
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-3.5 h-3.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2.5"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M9 5l7 7-7 7"
+                                />
+                            </svg>
+                        </span>
+                        <span class="text-sm font-semibold text-base-content group-hover:text-primary transition-colors duration-200 line-clamp-2 leading-snug">
+                            {nextPost.data.title}
+                        </span>
+                        <span class="text-xs text-base-content/40 mt-auto">
+                            {new Date(nextPost.data.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                        </span>
+                    </a>
+                )
+            }
+        </nav>
+
+        <!-- Back to all posts -->
+        <div class="mt-6">
+            <a href="/blog" class="btn btn-outline btn-primary btn-sm gap-2">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="w-4 h-4"
@@ -160,7 +261,7 @@ const formattedDate = new Date(data.publishedAt).toLocaleDateString("en-US", {
         <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 container mx-auto mt-8"
         >
-            {categoryPosts.map((post, i) => <BlogCard post={post} index={i} />)}
+            {categoryPosts?.map((post, i) => <BlogCard post={post} index={i} />)}
         </div>
     </section>
 </BaseLayout>
