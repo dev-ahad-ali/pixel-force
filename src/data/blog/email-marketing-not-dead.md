@@ -4,7 +4,7 @@ slug: "email-marketing-not-dead"
 excerpt: "With average open rates climbing and revenue per subscriber higher than ever, email remains the highest-ROI marketing channel. Here's the modern playbook for building a list that actually converts."
 author: "Sarah Okonkwo"
 authorRole: "Founder & Strategy Director"
-authorImage: "/images/team/sarah.jpg"
+authorImage: "https://i.pravatar.cc/150?img=7"
 coverImage: "/images/blog/brand-vs-logo.jpg"
 category: "Digital Marketing"
 tags:

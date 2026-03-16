@@ -4,7 +4,7 @@ slug: "business-website-must-haves-2025"
 excerpt: "A beautiful website that doesn't convert is just an expensive brochure. Here's the complete checklist of what separates websites that generate leads from those that just look good."
 author: "Jordan Eze"
 authorRole: "Lead Web Developer"
-authorImage: "/images/team/jordan.jpg"
+authorImage: "https://i.pravatar.cc/150?img=9"
 coverImage: "/images/blog/agency-failure.jpg"
 category: "Web Development"
 tags:

@@ -4,7 +4,7 @@ slug: "typography-in-brand-design"
 excerpt: "Most businesses treat typeface selection as an afterthought. The businesses with the strongest brand recognition treat it as a strategic asset. Here's why type choices shape how people feel about your brand."
 author: "Amara Diallo"
 authorRole: "Creative Director"
-authorImage: "/images/team/amara.jpg"
+authorImage: "https://i.pravatar.cc/150?img=2"
 coverImage: "/images/blog/brand-vs-logo.jpg"
 category: "Logo & Brand Design"
 tags:

@@ -4,7 +4,7 @@ slug: "ai-tools-we-use-in-our-agency"
 excerpt: "There are thousands of AI tools claiming to transform your workflow. After testing dozens, here's what we've actually kept using — and the honest reasons why some popular tools didn't make the cut."
 author: "Marcus Thiele"
 authorRole: "Head of AI & Automation"
-authorImage: "/images/team/marcus.jpg"
+authorImage: "https://i.pravatar.cc/150?img=8"
 coverImage: "/images/blog/ai-automation.jpg"
 category: "AI Automation"
 tags:

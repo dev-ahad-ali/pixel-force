@@ -4,7 +4,7 @@ slug: "meta-ads-that-convert-2025"
 excerpt: "Meta advertising has never been more powerful — or more misunderstood. This is the full breakdown of how we structure campaigns that consistently deliver 4x+ ROAS for our clients."
 author: "Sarah Okonkwo"
 authorRole: "Founder & Strategy Director"
-authorImage: "/images/team/sarah.jpg"
+authorImage: "https://i.pravatar.cc/150?img=8"
 coverImage: "/images/blog/astro-development.jpg"
 category: "Digital Marketing"
 tags:

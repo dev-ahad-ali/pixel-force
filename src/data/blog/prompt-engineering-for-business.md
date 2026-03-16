@@ -4,7 +4,7 @@ slug: "prompt-engineering-for-business"
 excerpt: "Most people use AI tools like a search engine and get mediocre results. Prompt engineering is the skill that separates teams getting 10x productivity gains from those still underwhelmed by ChatGPT."
 author: "Marcus Thiele"
 authorRole: "Head of AI & Automation"
-authorImage: "/images/team/marcus.jpg"
+authorImage: "https://i.pravatar.cc/150?img=2"
 coverImage: "/images/blog/agency-failure.jpg"
 category: "AI Automation"
 tags:

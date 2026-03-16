@@ -4,7 +4,7 @@ slug: "headless-cms-vs-traditional-cms"
 excerpt: "Sanity, Contentful, and Strapi are gaining ground on WordPress — but headless isn't always the right answer. Here's an honest breakdown to help you make the right decision for your project."
 author: "Jordan Eze"
 authorRole: "Lead Web Developer"
-authorImage: "/images/team/jordan.jpg"
+authorImage: "https://i.pravatar.cc/150?img=4"
 coverImage: "/images/blog/astro-development.jpg"
 category: "Web Development"
 tags:

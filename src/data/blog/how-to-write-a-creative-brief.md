@@ -4,7 +4,7 @@ slug: "how-to-write-a-creative-brief"
 excerpt: "The quality of your design brief determines the quality of your design output. Most briefs are too vague, too prescriptive, or both. Here's exactly what to include — and what to leave out."
 author: "Amara Diallo"
 authorRole: "Creative Director"
-authorImage: "/images/team/amara.jpg"
+authorImage: "https://i.pravatar.cc/150?img=2"
 coverImage: "/images/blog/ai-automation.jpg"
 category: "Logo & Brand Design"
 tags:
